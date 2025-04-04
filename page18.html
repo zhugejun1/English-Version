@@ -1,5 +1,5 @@
 <!DOCTYPE html>  
-<html lang="en">  
+<html lang="zh">  
 <head>  
     <meta charset="UTF-8" />  
     <title>Question 18 - Math Problem</title>  
@@ -7,99 +7,68 @@
     <script src="https://cdn.tailwindcss.com"></script>  
     <!-- D3.js v6 -->  
     <script src="https://d3js.org/d3.v6.min.js"></script>  
-
     <!-- MathJax Configuration -->  
     <script>  
         MathJax = {  
-            tex: {  
-                inlineMath: [ ["\\(", "\\)"] ],  
-                displayMath: [ ["$$", "$$"] ],  
-                processEscapes: true  
-            },  
-            svg: {  
-                    fontCache: "global"  
-                }  
+            tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["$$", "$$"]] },  
+            svg: { fontCache: "global" }  
         };  
     </script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.min.js"></script>  
-
     <style>  
         body { margin: 0; font-family: Arial, sans-serif; background-color: #f6f9fc; }  
         .node circle { cursor: pointer; }  
-        .node circle:hover { fill: #555; }  
-        .node text { pointer-events: none; font-size: 12px; fill: #333; }  
+        .node circle:hover { fill: #333; }  
+        .node text { pointer-events: none; font-size: 10px; fill: #333; }  
         line.link { stroke: #ccc; stroke-width: 1.5px; }  
-        .tooltip { position: absolute; min-width: 150px; padding: 8px; font-size: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #ddd; border-radius: 4px; pointer-events: none; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); opacity: 0; transition: opacity 0.2s; z-index: 999; }  
+        .tooltip { position: absolute; min-width: 120px; padding: 8px; font-size: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 4px; pointer-events: none; box-shadow: 0 2px 5px rgba(0,0,0,0.15); opacity: 0; transition: opacity 0.2s; z-index: 999; }  
         .line { fill: none; stroke-width: 2px; }  
         .line-chart-axis path, .line-chart-axis line { fill: none; stroke: #ccc; }  
         .dot { fill: #ff5722; stroke: #fff; stroke-width: 1px; cursor: pointer; }  
         .dot:hover { opacity: 0.8; }  
-        .color-legend { position: absolute; bottom: 20px; left: 20px; background: rgba(255, 255, 255, 0.95); padding: 10px; border-radius: 4px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }  
-        .legend-item { display: flex; align-items: center; margin-bottom: 5px; }  
-        .legend-color { width: 16px; height: 16px; margin-right: 8px; border-radius: 50%; }  
+        .legend { font-size: 12px; }  
     </style>  
 </head>  
 <body class="h-screen w-screen overflow-hidden bg-gray-100">  
 
-<!-- Back Button -->  
+<!-- Top: Return Button -->  
 <div class="p-4 bg-white shadow">  
     <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
         Return to Question List  
     </button>  
 </div>  
 
-<!-- Main Content: Left Panel (Force Directed Graph) + Right Panel (Question Info and Chart) -->  
+<!-- Main Content: Force-directed graph on the left + Question info on the right -->  
 <div class="flex h-[calc(100vh-64px)]">  
 
-    <!-- Left Panel: Force Directed Graph -->  
+    <!-- Left: Force-directed graph -->  
     <div id="left-panel" class="w-1/2 h-full bg-white relative">  
         <svg id="graph-svg" class="w-full h-full"></svg>  
         <div id="graph-tooltip" class="tooltip"></div>  
-        
-        <!-- Color Legend -->  
-        <div class="color-legend">  
-            <h3 class="text-sm font-bold mb-2">Accuracy Legend:</h3>  
-            <div class="legend-item">  
-                <div class="legend-color" style="background-color: #ef4444;"></div>  
-                <span class="text-xs">Below 40%</span>  
-            </div>  
-            <div class="legend-item">  
-                <div class="legend-color" style="background-color: #f97316;"></div>  
-                <span class="text-xs">40%-60%</span>  
-            </div>  
-            <div class="legend-item">  
-                <div class="legend-color" style="background-color: #eab308;"></div>  
-                <span class="text-xs">60%-80%</span>  
-            </div>  
-            <div class="legend-item">  
-                <div class="legend-color" style="background-color: #22c55e;"></div>  
-                <span class="text-xs">Above 80%</span>  
-            </div>  
-        </div>  
     </div>  
 
-    <!-- Right Panel: Question Information and Historical Accuracy Trend -->  
+    <!-- Right: Question information -->  
     <div id="right-panel" class="w-1/2 h-full flex flex-col p-4 space-y-4">  
 
-        <!-- Question 18(1) Description -->  
-        <div class="bg-white p-4 rounded shadow">  
-            <h1 class="text-xl font-bold mb-2">Question Number: Question 18(1)</h1>  
-            <p class="mb-4">Find the value of \( x \) in the following equation:</p>  
+        <!-- Question 18 (1) description section -->  
+        <div class="bg-white p-4 rounded shadow mb-4">  
+            <h1 class="text-xl font-bold mb-2">Question 18 (1)</h1>  
+            <p class="mb-4">Solve for \( x \) in the following equation:</p>  
             <p class="mb-4">\( x^3 - 8 = 0 \)</p>  
-            <p>Current Mastery Rate: <span class="text-red-600 font-medium">35.14%</span></p>  
+            <p>Current Mastery Rate: <span class="text-green-600 font-medium">35.14%</span></p>  
             <p>Historical Accuracy Rate: <span class="text-yellow-600 font-medium">60%</span></p>  
         </div>  
 
-        <!-- Question 18(2) Description -->  
-        <div class="bg-white p-4 rounded shadow">  
-            <h1 class="text-xl font-bold mb-2">Question Number: Question 18(2)</h1>  
-            <p class="mb-4">Find the value of \( x \) in the following equation:</p>  
+        <!-- Question 18 (2) description section -->  
+        <div class="bg-white p-4 rounded shadow mb-4">  
+            <h1 class="text-xl font-bold mb-2">Question 18 (2)</h1>  
+            <p class="mb-4">Solve for \( x \) in the following equation:</p>  
             <p class="mb-4">\( x^3 - 3 = \frac{3}{8} \)</p>  
-            <p>Current Mastery Rate: <span class="text-red-600 font-medium">35.14%</span></p>  
+            <p>Current Mastery Rate: <span class="text-green-600 font-medium">35.14%</span></p>  
             <p>Historical Accuracy Rate: <span class="text-yellow-600 font-medium">60%</span></p>  
         </div>  
 
-        <!-- Historical Accuracy Rate Line Chart -->  
+        <!-- Historical Accuracy Trend Graph -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
             <h2 class="text-lg font-bold mb-2">Historical Accuracy Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
@@ -109,63 +78,63 @@
 </div>  
 
 <script>  
-// Knowledge Points and Example Questions Data  
+// ==================== Knowledge Points Mapping ====================  
 const knowledgeQuestions = {  
     "Cube Root": {  
         basic: "Understand the concept and calculation of cube roots",  
-        medium: "Master the relationship between cube roots and cubic equations",  
-        advanced: "Apply cube roots to solve complex algebra problems",  
-        accuracy: 0.35  
+        medium: "Master cube roots and their relationship with cubic equations",  
+        advanced: "Apply cube roots to solve complex algebraic problems",  
+        accuracy: 0.35 // 35%  
     },  
     "Properties of Cube Roots": {  
         basic: "Understand the basic properties of cube roots",  
         medium: "Master the relationship between cube roots and positive/negative numbers",  
-        advanced: "Use cube roots to solve geometry problems",  
-        accuracy: 0.40  
+        advanced: "Use cube roots to solve geometric problems",  
+        accuracy: 0.40 // 40%  
     },  
     "Applications of Cube Roots": {  
         basic: "Understand the application of cube roots in real-world problems",  
         medium: "Calculate cube roots in practical scenarios",  
-        advanced: "Apply cube roots to volume-related problems",  
-        accuracy: 0.55  
+        advanced: "Apply cube roots in volume-related problems",  
+        accuracy: 0.55 // 55%  
     },  
     "Cubic Equations": {  
         basic: "Understand the standard form of cubic equations",  
         medium: "Master methods for solving cubic equations",  
-        advanced: "Apply cubic equations under various conditions",  
-        accuracy: 0.60  
+        advanced: "Apply cubic equations in various problem-solving scenarios",  
+        accuracy: 0.60 // 60%  
     },  
     "Factoring of Cubic Equations": {  
-        basic: "Understand how to factorize cubic equations",  
-        medium: "Master techniques for factoring common cubic equations",  
+        basic: "Understand how to factor cubic equations",  
+        medium: "Master common factoring techniques for cubic equations",  
         advanced: "Use factoring to solve higher-order equations",  
-        accuracy: 0.70  
+        accuracy: 0.70 // 70%  
     },  
     "Factoring": {  
         basic: "Understand the basics of factoring",  
         medium: "Master factoring of common cubic polynomials",  
-        advanced: "Apply factoring to solve complex algebra problems",  
-        accuracy: 0.80  
+        advanced: "Apply factoring to solve complex algebraic problems",  
+        accuracy: 0.80 // 80%  
     },  
     "Applications of Factoring": {  
         basic: "Understand the importance of factoring in algebra",  
         medium: "Simplify algebraic expressions through factoring",  
-        advanced: "Use factoring flexibly when solving equations",  
-        accuracy: 0.75  
+        advanced: "Apply factoring flexibly when solving equations",  
+        accuracy: 0.75 // 75%  
     },  
     "Graphical Method": {  
-        basic: "Understand the basic approach of graphical methods",  
-        medium: "Master how to solve equations graphically",  
-        advanced: "Use graphical methods to solve advanced algebra problems",  
-        accuracy: 0.65  
+        basic: "Understand the basic approach of graphical method",  
+        medium: "Master how to solve equations using graphs",  
+        advanced: "Apply graphical method to solve advanced algebraic problems",  
+        accuracy: 0.65 // 65%  
     }  
 };  
 
-// Force Directed Graph Data  
+// ==================== Force-directed Graph Data ====================  
 const graphData = {  
     nodes: [  
-        { id: "Q18_1", type: "question", name: "Question 18(1)" },  
-        { id: "Q18_2", type: "question", name: "Question 18(2)" },  
+        { id: "Q18_1", type: "question", name: "Question 18 (1)" },  
+        { id: "Q18_2", type: "question", name: "Question 18 (2)" },  
         { id: "K1", type: "knowledge", name: "Cube Root" },  
         { id: "K2", type: "knowledge", name: "Properties of Cube Roots" },  
         { id: "K3", type: "knowledge", name: "Applications of Cube Roots" },  
@@ -173,34 +142,25 @@ const graphData = {
         { id: "K5", type: "knowledge", name: "Factoring of Cubic Equations" },  
         { id: "K6", type: "knowledge", name: "Factoring" },  
         { id: "K7", type: "knowledge", name: "Applications of Factoring" },  
-        { id: "K8", type: "knowledge", name: "Graphical Method" }  
+        { id: "K8", type: "knowledge", name: "Graphical Method" },  
+        { id: "E1", type: "example", name: "Example 1: Finding Cube Roots" },  
+        { id: "E2", type: "example", name: "Example 2: Solving Cubic Equations" }  
     ],  
     links: [  
         { source: "Q18_1", target: "K1" },  
         { source: "K1", target: "K2" },  
-        { source: "K1", target: "K3" },  
+        { source: "K1", target: "K3" }, // Applications of Cube Roots  
         { source: "Q18_2", target: "K4" },  
         { source: "K4", target: "K5" },  
         { source: "K5", target: "K6" },  
-        { source: "K6", target: "K7" },  
-        { source: "K4", target: "K8" }  
+        { source: "K6", target: "K7" }, // Applications of Factoring  
+        { source: "K4", target: "K8" }, // Cubic Equations and Graphical Method  
+        { source: "K2", target: "E1" }, // Cube Root Example  
+        { source: "K4", target: "E2" } // Cubic Equation Example  
     ]  
 };  
 
-// Node Color Function  
-function getNodeColor(d) {  
-    if (d.type === "question") {  
-        return "#fca5a5"; // Question node color  
-    }  
-    
-    const acc = knowledgeQuestions[d.name].accuracy;  
-    if (acc < 0.4) return "#ef4444"; // Below 40%  
-    if (acc < 0.6) return "#f97316"; // 40%-60%  
-    if (acc < 0.8) return "#eab308"; // 60%-80%  
-    return "#22c55e"; // Above 80%  
-}  
-
-// Draw Force Directed Graph  
+// ==================== Force-directed Graph Rendering ====================  
 const width = document.getElementById("left-panel").clientWidth;  
 const height = document.getElementById("left-panel").clientHeight;  
 
@@ -208,13 +168,29 @@ const svgGraph = d3.select("#graph-svg")
     .attr("width", width)  
     .attr("height", height);  
 
-// Enhanced Force Directed Graph Configuration  
+// Add drag functionality  
 const simulation = d3.forceSimulation(graphData.nodes)  
-    .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))  
-    .force("charge", d3.forceManyBody().strength(-600))  
+    .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(110))  
+    .force("charge", d3.forceManyBody().strength(-300))  
     .force("center", d3.forceCenter(width / 2, height / 2))  
-    .force("collision", d3.forceCollide().radius(60)) // Prevent node overlap  
     .on("tick", ticked);  
+
+// Add drag event handlers  
+const drag = d3.drag()  
+    .on("start", (event, d) => {  
+        simulation.alphaTarget(0.3).restart();  
+        d.fx = event.x;  
+        d.fy = event.y;  
+    })  
+    .on("drag", (event, d) => {  
+        d.fx = event.x;  
+        d.fy = event.y;  
+    })  
+    .on("end", (event, d) => {  
+        simulation.alphaTarget(0);  
+        d.fx = null;  
+        d.fy = null;  
+    });  
 
 const link = svgGraph.selectAll("line.link")  
     .data(graphData.links)  
@@ -227,32 +203,39 @@ const node = svgGraph.selectAll("g.node")
     .enter()  
     .append("g")  
     .attr("class", "node")  
-    .call(d3.drag() // Add drag functionality  
-        .on("start", dragstarted)  
-        .on("drag", dragged)  
-        .on("end", dragended));  
+    .call(drag);  
 
 const tooltipGraph = d3.select("#graph-tooltip");  
 
 node.append("circle")  
     .attr("r", d => d.type === "question" ? 18 : 14)  
-    .attr("fill", d => getNodeColor(d))  
+    .attr("fill", d => {  
+        if (d.type === "question") return "#fca5a5"; // Light red  
+        if (d.type === "knowledge") {  
+            const accuracy = knowledgeQuestions[d.name].accuracy;  
+            if (accuracy < 0.4) return "red"; // Below 40%  
+            else if (accuracy < 0.6) return "orange"; // 40% to 60%  
+            else if (accuracy < 0.8) return "yellow"; // 60% to 80%  
+            return "green"; // Above 80%  
+        }  
+        return "#93c5fd"; // Light blue  
+    })  
     .on("mouseover", (event, d) => {  
         let htmlStr = "";  
         if (d.type === "question") {  
-            htmlStr = `Question Number：<strong>${d.name}</strong>`;  
+            htmlStr = `Question: <strong>${d.name}</strong>`;  
         } else {  
-            htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
+            htmlStr = `Knowledge Point: <strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
             if (qSet) {  
                 htmlStr += `  
-                    <br/><strong>Basic：</strong>${qSet.basic}  
-                    <br/><strong>Medium：</strong>${qSet.medium}  
-                    <br/><strong>Advanced：</strong>${qSet.advanced}  
-                    <br/><strong>Historical Accuracy：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
+                    <br/><strong>Basic:</strong> ${qSet.basic}  
+                    <br/><strong>Intermediate:</strong> ${qSet.medium}  
+                    <br/><strong>Advanced:</strong> ${qSet.advanced}  
+                    <br/><strong>Historical Accuracy:</strong> ${(qSet.accuracy * 100).toFixed(1)}%  
                 `;  
             } else {  
-                htmlStr += "<br/>No example questions available";  
+                htmlStr += "<br/>No example available";  
             }  
         }  
         tooltipGraph  
@@ -271,31 +254,7 @@ node.append("text")
     .attr("fill", "#333")  
     .attr("font-weight", d => (d.type === "question" ? "bold" : "normal"));  
 
-// Drag Functionality Implementation  
-function dragstarted(event, d) {  
-    if (!event.active) simulation.alphaTarget(0.3).restart();  
-    d.fx = d.x;  
-    d.fy = d.y;  
-}  
-
-function dragged(event, d) {  
-    d.fx = event.x;  
-    d.fy = event.y;  
-}  
-
-function dragended(event, d) {  
-    if (!event.active) simulation.alphaTarget(0);  
-    d.fx = null;  
-    d.fy = null;  
-}  
-
 function ticked() {  
-    // Keep nodes within visible area  
-    graphData.nodes.forEach(function(d) {  
-        d.x = Math.max(40, Math.min(width - 40, d.x));  
-        d.y = Math.max(40, Math.min(height - 40, d.y));  
-    });  
-    
     link  
         .attr("x1", d => d.source.x)  
         .attr("y1", d => d.source.y)  
@@ -305,7 +264,36 @@ function ticked() {
     node.attr("transform", d => `translate(${d.x}, ${d.y})`);  
 }  
 
-// Historical Accuracy Rate Line Chart  
+// ==================== Color Legend ====================  
+const colorLegend = d3.select("#graph-svg").append("g")  
+    .attr("class", "legend")  
+    .attr("transform", `translate(10, ${height - 100})`);  
+
+const colors = [  
+    { color: "red", text: "Below 40%" },  
+    { color: "orange", text: "40%-60%" },  
+    { color: "yellow", text: "60%-80%" },  
+    { color: "green", text: "Above 80%" },  
+    { color: "gray", text: "Related Knowledge Points" }  
+];  
+
+colors.forEach((item, index) => {  
+    const g = colorLegend.append("g")  
+        .attr("transform", `translate(0, ${index * 20})`);  
+
+    g.append("circle")  
+        .attr("cx", 0)  
+        .attr("cy", 0)  
+        .attr("r", 8)  
+        .attr("fill", item.color);  
+
+    g.append("text")  
+        .attr("x", 15)  
+        .attr("y", 0)  
+        .text(item.text);  
+});  
+
+// ==================== Historical Accuracy Trend Graph ====================  
 const trendData1 = [  
     { time: "Test 1", accuracy: 0.39 },  
     { time: "Test 2", accuracy: 0.36 },  
@@ -322,12 +310,12 @@ const trendData2 = [
     { time: "Test 5", accuracy: 0.47 }  
 ];  
 
-const chartWidth = document.getElementById("line-chart").clientWidth;  
-const chartHeight = document.getElementById("line-chart").clientHeight;  
+const lineChartWidth = document.getElementById("line-chart").clientWidth;  
+const lineChartHeight = document.getElementById("line-chart").clientHeight;  
 
 const margin = { top: 20, right: 20, bottom: 30, left: 40 };  
-const innerWidth = chartWidth - margin.left - margin.right;  
-const innerHeight = chartHeight - margin.top - margin.bottom;  
+const innerWidth = lineChartWidth - margin.left - margin.right;  
+const innerHeight = lineChartHeight - margin.top - margin.bottom;  
 
 const xScale = d3.scalePoint()  
     .domain(trendData1.map(d => d.time))  
@@ -339,8 +327,8 @@ const yScale = d3.scaleLinear()
     .range([innerHeight, 0]);  
 
 const svgLine = d3.select("#line-chart")  
-    .attr("width", chartWidth)  
-    .attr("height", chartHeight)  
+    .attr("width", lineChartWidth)  
+    .attr("height", lineChartHeight)  
     .append("g")  
     .attr("transform", `translate(${margin.left},${margin.top})`);  
 
@@ -356,31 +344,27 @@ svgLine.append("g")
     .attr("class", "line-chart-axis")  
     .call(yAxis);  
 
+// Draw historical accuracy line for Question 18 (1)  
 const lineGenerator1 = d3.line()  
     .x(d => xScale(d.time))  
-    .y(d => yScale(d.accuracy))  
-    .curve(d3.curveMonotoneX);  
-
-const lineGenerator2 = d3.line()  
-    .x(d => xScale(d.time))  
-    .y(d => yScale(d.accuracy))  
-    .curve(d3.curveMonotoneX);  
+    .y(d => yScale(d.accuracy));  
 
 svgLine.append("path")  
     .datum(trendData1)  
     .attr("class", "line")  
-    .attr("fill", "none")  
-    .attr("stroke", "#f97316") // Color for Question 18(1)  
-    .attr("stroke-width", 2)  
-    .attr("d", lineGenerator1);  
+    .attr("d", lineGenerator1)  
+    .attr("stroke", "#f97316"); // Color for Question 18 (1)  
+
+// Draw historical accuracy line for Question 18 (2)  
+const lineGenerator2 = d3.line()  
+    .x(d => xScale(d.time))  
+    .y(d => yScale(d.accuracy));  
 
 svgLine.append("path")  
     .datum(trendData2)  
     .attr("class", "line")  
-    .attr("fill", "none")  
-    .attr("stroke", "#1d4ed8") // Color for Question 18(2)  
-    .attr("stroke-width", 2)  
-    .attr("d", lineGenerator2);  
+    .attr("d", lineGenerator2)  
+    .attr("stroke", "#1d4ed8"); // Color for Question 18 (2)  
 
 const tooltipLine = d3.select("#line-tooltip");  
 
@@ -392,10 +376,9 @@ svgLine.selectAll(".dot1")
     .attr("r", 4)  
     .attr("cx", d => xScale(d.time))  
     .attr("cy", d => yScale(d.accuracy))  
-    .attr("fill", "#ff5722")  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>Question 18(1) Accuracy：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Question 18 (1) Accuracy: <strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
@@ -412,10 +395,9 @@ svgLine.selectAll(".dot2")
     .attr("r", 4)  
     .attr("cx", d => xScale(d.time))  
     .attr("cy", d => yScale(d.accuracy))  
-    .attr("fill", "#1d4ed8")  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>Question 18(2) Accuracy：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Question 18 (2) Accuracy: <strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
@@ -424,5 +406,8 @@ svgLine.selectAll(".dot2")
         tooltipLine.style("opacity", 0);  
     });  
 </script>  
+
+<!-- Tooltip layer -->  
+<div id="line-tooltip" class="tooltip"></div>  
 </body>  
 </html>  
