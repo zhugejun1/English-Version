@@ -1,8 +1,8 @@
 <!DOCTYPE html>  
-<html lang="zh">  
+<html lang="en">  
 <head>  
     <meta charset="UTF-8" />  
-    <title>第11题 - 数学题目</title>  
+    <title>Question 11 - Math Problem</title>  
     <!-- Tailwind CSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
     <!-- D3.js v6 -->  
@@ -38,7 +38,7 @@
 <!-- 顶部：返回按钮 -->  
 <div class="p-4 bg-white shadow">  
     <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
-        返回题目列表  
+        Return to Question List  
     </button>  
 </div>  
 
@@ -52,10 +52,10 @@
         
         <!-- 颜色对应正确率说明 -->  
         <div class="color-legend">  
-            <h3 class="text-sm font-bold mb-2">正确率说明:</h3>  
+            <h3 class="text-sm font-bold mb-2">Accuracy Level Explanation:</h3>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #ef4444;"></div>  
-                <span class="text-xs">低于40%</span>  
+                <span class="text-xs">Below 40%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #f97316;"></div>  
@@ -67,11 +67,11 @@
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #22c55e;"></div>  
-                <span class="text-xs">大于80%</span>  
+                <span class="text-xs">Above 80%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #9ca3af;"></div>  
-                <span class="text-xs">相关知识点</span>  
+                <span class="text-xs">Related Knowledge Points</span>  
             </div>  
         </div>  
     </div>  
@@ -81,31 +81,31 @@
 
         <!-- 题干描述区域 -->  
         <div class="bg-white p-4 rounded shadow">  
-            <h1 class="text-xl font-bold mb-2">题号：第11题</h1>  
-            <p class="mb-4">\(\sqrt{2}\) 的相反数是 _____；</p>  
-            <p class="mb-4">3 - π 的绝对值是 _____；</p>  
-            <p class="mb-4">\(^3\sqrt{\frac{1}{27}}\) = _____.</p>  
+            <h1 class="text-xl font-bold mb-2">Question Number: 11</h1>  
+            <p class="mb-4">The opposite of \(\sqrt{2}\) is ______;</p>  
+            <p class="mb-4">The absolute value of \(3 - \pi\) is ______;</p>  
+            <p class="mb-4">The cube root of \(\frac{1}{27}\) is ______.</p>  
 
             <div class="mb-4">  
-                <label for="answer1" class="block">相反数：</label>  
-                <input type="text" id="answer1" class="border p-2 rounded w-full" />  
+                <label for="answer1" class="block">Opposite of:</label>  
+                <input type="text" id="answer1" class="border p-2 rounded w-full" placeholder="Enter the opposite of √2" />  
             </div>  
             <div class="mb-4">  
-                <label for="answer2" class="block">3 - π 的绝对值：</label>  
-                <input type="text" id="answer2" class="border p-2 rounded w-full" />  
+                <label for="answer2" class="block">Absolute Value of 3 - π:</label>  
+                <input type="text" id="answer2" class="border p-2 rounded w-full" placeholder="Enter the absolute value" />  
             </div>  
             <div class="mb-4">  
-                <label for="answer3" class="block">³√(1/27)：</label>  
-                <input type="text" id="answer3" class="border p-2 rounded w-full" />  
+                <label for="answer3" class="block">Cube Root of 1/27:</label>  
+                <input type="text" id="answer3" class="border p-2 rounded w-full" placeholder="Enter the cube root value" />  
             </div>  
             
-            <p>当前掌握率：<span class="text-green-600 font-medium">78.94%</span></p>  
-            <p>历史正确率：<span class="text-yellow-600 font-medium">75%</span></p>  
+            <p>Current Mastery Rate：<span class="text-green-600 font-medium">78.94%</span></p>  
+            <p>Historical Accuracy Rate：<span class="text-yellow-600 font-medium">75%</span></p>  
         </div>  
 
-        <!-- 历史正确率折线图 -->  
+        <!-- Historical Accuracy Trend Line Chart -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
-            <h2 class="text-lg font-bold mb-2">历史正确率趋势</h2>  
+            <h2 class="text-lg font-bold mb-2">Historical Accuracy Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
             <div id="line-tooltip" class="tooltip"></div>  
         </div>  
@@ -113,86 +113,86 @@
 </div>  
 
 <script>  
-// 知识点与示例题数据  
+// Knowledge points and example questions data  
 const knowledgeQuestions = {  
-    "数的性质": {  
-        basic: "数的意义及相反数",  
-        medium: "综合运算应用",  
-        advanced: "数及其变式",  
+    "Properties of Numbers": {  
+        basic: "Meaning and opposite of numbers",  
+        medium: "Comprehensive application of operations",  
+        advanced: "Number variants and properties",  
         accuracy: 0.76  
     },  
-    "绝对值": {  
-        basic: "定义及计算公式",  
-        medium: "常规应用题",  
-        advanced: "绝对值方程与不等式",  
+    "Absolute Value": {  
+        basic: "Definition and calculation formula",  
+        medium: "Standard application problems",  
+        advanced: "Absolute value equations and inequalities",  
         accuracy: 0.72  
     },  
-    "立方根": {  
-        basic: "理解立方根概念",  
-        medium: "立方根的性质与计算",  
-        advanced: "立方根的综合运用",  
+    "Cube Root": {  
+        basic: "Understanding cube root concept",  
+        medium: "Properties and calculation of cube roots",  
+        advanced: "Comprehensive application of cube roots",  
         accuracy: 0.68  
     },  
-    "代数表达式": {  
-        basic: "基本代数符号与意义",  
-        medium: "代数符号代入法",  
-        advanced: "代数式提高题",  
+    "Algebraic Expressions": {  
+        basic: "Basic algebraic symbols and meanings",  
+        medium: "Substitution method in algebra",  
+        advanced: "Advanced algebraic expressions",  
         accuracy: 0.81  
     },  
-    "函数与方程": {  
-        basic: "简单函数的解析",  
-        medium: "函数关系及方程式",  
-        advanced: "综合函数与高阶求解",  
+    "Functions and Equations": {  
+        basic: "Simple function analysis",  
+        medium: "Functional relationships and equations",  
+        advanced: "Advanced functions and higher-level solving",  
         accuracy: 0.63,  
         related: true  
     },  
-    "平方根": {  
-        basic: "平方根的概念与性质",  
-        medium: "平方根的运算规则",  
-        advanced: "无理数与平方根",  
+    "Square Root": {  
+        basic: "Concept and properties of square roots",  
+        medium: "Operational rules of square roots",  
+        advanced: "Irrational numbers and square roots",  
         accuracy: 0.75  
     },  
-    "无理数": {  
-        basic: "无理数的定义与表示",  
-        medium: "无理数的运算",  
-        advanced: "无理数的近似值",  
+    "Irrational Numbers": {  
+        basic: "Definition and representation of irrational numbers",  
+        medium: "Operations with irrational numbers",  
+        advanced: "Approximate values of irrational numbers",  
         accuracy: 0.66  
     },  
-    "分数运算": {  
-        basic: "分数的基本运算",  
-        medium: "分数的乘除法则",  
-        advanced: "复杂分数式的计算",  
+    "Fraction Operations": {  
+        basic: "Basic fraction operations",  
+        medium: "Multiplication and division rules of fractions",  
+        advanced: "Complex fraction calculations",  
         accuracy: 0.82  
     },  
-    "数学常数": {  
-        basic: "常用数学常数的意义",  
-        medium: "π及其应用",  
-        advanced: "常数在计算中的处理",  
+    "Mathematical Constants": {  
+        basic: "Meaning of commonly used mathematical constants",  
+        medium: "Application of π",  
+        advanced: "Handling of constants in calculations",  
         accuracy: 0.77  
     },  
-    "数值计算": {  
-        basic: "基本数值计算方法",  
-        medium: "精确值与近似值",  
-        advanced: "复杂数值计算技巧",  
+    "Numerical Calculation": {  
+        basic: "Basic methods of numerical calculation",  
+        medium: "Exact and approximate values",  
+        advanced: "Advanced techniques in complex numerical calculations",  
         accuracy: 0.58,  
         related: true  
     }  
 };  
 
-// 设置力导向图数据  
+// Force-directed graph data setup  
 const graphData = {  
     nodes: [  
-        { id: "Q11", type: "question", name: "第11题", accuracy: 0.75 },  
-        { id: "K1", type: "knowledge", name: "数的性质", accuracy: 0.76 },  
-        { id: "K2", type: "knowledge", name: "绝对值", accuracy: 0.72 },  
-        { id: "K3", type: "knowledge", name: "立方根", accuracy: 0.68 },  
-        { id: "K4", type: "knowledge", name: "代数表达式", accuracy: 0.81 },  
-        { id: "K5", type: "knowledge", name: "函数与方程", accuracy: 0.63, related: true },  
-        { id: "K6", type: "knowledge", name: "平方根", accuracy: 0.75 },  
-        { id: "K7", type: "knowledge", name: "无理数", accuracy: 0.66 },  
-        { id: "K8", type: "knowledge", name: "分数运算", accuracy: 0.82 },  
-        { id: "K9", type: "knowledge", name: "数学常数", accuracy: 0.77 },  
-        { id: "K10", type: "knowledge", name: "数值计算", accuracy: 0.58, related: true }  
+        { id: "Q11", type: "question", name: "Question 11", accuracy: 0.75 },  
+        { id: "K1", type: "knowledge", name: "Properties of Numbers", accuracy: 0.76 },  
+        { id: "K2", type: "knowledge", name: "Absolute Value", accuracy: 0.72 },  
+        { id: "K3", type: "knowledge", name: "Cube Root", accuracy: 0.68 },  
+        { id: "K4", type: "knowledge", name: "Algebraic Expressions", accuracy: 0.81 },  
+        { id: "K5", type: "knowledge", name: "Functions and Equations", accuracy: 0.63, related: true },  
+        { id: "K6", type: "knowledge", name: "Square Root", accuracy: 0.75 },  
+        { id: "K7", type: "knowledge", name: "Irrational Numbers", accuracy: 0.66 },  
+        { id: "K8", type: "knowledge", name: "Fraction Operations", accuracy: 0.82 },  
+        { id: "K9", type: "knowledge", name: "Mathematical Constants", accuracy: 0.77 },  
+        { id: "K10", type: "knowledge", name: "Numerical Calculation", accuracy: 0.58, related: true }  
     ],  
     links: [  
         { source: "Q11", target: "K1" },  
@@ -212,24 +212,24 @@ const graphData = {
     ]  
 };  
 
-// 获取节点颜色函数  
+// Function to get node colors  
 function getNodeColor(d) {  
     if (d.type === "question") {  
-        return "#fca5a5"; // 题目节点颜色  
+        return "#fca5a5"; // Color for question nodes  
     }  
     
     if (d.related) {  
-        return "#9ca3af"; // 相关知识点为灰色  
+        return "#9ca3af"; // Gray for related knowledge points  
     }  
     
     const acc = d.accuracy;  
-    if (acc < 0.4) return "#ef4444"; // 红色，低于40%  
-    if (acc < 0.6) return "#f97316"; // 橙色，40%-60%  
-    if (acc < 0.8) return "#eab308"; // 黄色，60%-80%  
-    return "#22c55e"; // 绿色，大于80%  
+    if (acc < 0.4) return "#ef4444"; // Red for below 40%  
+    if (acc < 0.6) return "#f97316"; // Orange for 40%-60%  
+    if (acc < 0.8) return "#eab308"; // Yellow for 60%-80%  
+    return "#22c55e"; // Green for above 80%  
 }  
 
-// 绘制力导向图  
+// Draw force-directed graph  
 const width = document.getElementById("left-panel").clientWidth;  
 const height = document.getElementById("left-panel").clientHeight;  
 
@@ -237,12 +237,12 @@ const svgGraph = d3.select("#graph-svg")
     .attr("width", width)  
     .attr("height", height);  
 
-// 增强力导向图配置，防止重叠  
+// Enhanced force-directed graph configuration  
 const simulation = d3.forceSimulation(graphData.nodes)  
     .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))  
     .force("charge", d3.forceManyBody().strength(-600))  
     .force("center", d3.forceCenter(width / 2, height / 2))  
-    .force("collision", d3.forceCollide().radius(60)) // 增加碰撞检测  
+    .force("collision", d3.forceCollide().radius(60)) // Enhanced collision detection  
     .on("tick", ticked);  
 
 const link = svgGraph.selectAll("line.link")  
@@ -256,7 +256,7 @@ const node = svgGraph.selectAll("g.node")
     .enter()  
     .append("g")  
     .attr("class", "node")  
-    .call(d3.drag() // 添加拖拽功能  
+    .call(d3.drag() // Add drag functionality  
         .on("start", dragstarted)  
         .on("drag", dragged)  
         .on("end", dragended));  
@@ -269,19 +269,19 @@ node.append("circle")
     .on("mouseover", (event, d) => {  
         let htmlStr = "";  
         if (d.type === "question") {  
-            htmlStr = `题号：<strong>${d.name}</strong>`;  
+            htmlStr = `Question：<strong>${d.name}</strong>`;  
         } else {  
-            htmlStr = `知识点：<strong>${d.name}</strong>`;  
+            htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
             if (qSet) {  
                 htmlStr += `  
-                    <br/><strong>基础题：</strong>${qSet.basic}  
-                    <br/><strong>中等题：</strong>${qSet.medium}  
-                    <br/><strong>较难题：</strong>${qSet.advanced}  
-                    <br/><strong>正确率：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
+                    <br/><strong>Basic：</strong>${qSet.basic}  
+                    <br/><strong>Medium：</strong>${qSet.medium}  
+                    <br/><strong>Advanced：</strong>${qSet.advanced}  
+                    <br/><strong>Accuracy：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
                 `;  
             } else {  
-                htmlStr += "<br/>暂无示例题";  
+                htmlStr += "<br/>No example questions available";  
             }  
         }  
         tooltipGraph  
@@ -300,7 +300,7 @@ node.append("text")
     .attr("fill", "#333")  
     .attr("font-weight", d => (d.type === "question" ? "bold" : "normal"));  
 
-// 拖拽功能实现  
+// Drag functionality implementation  
 function dragstarted(event, d) {  
     if (!event.active) simulation.alphaTarget(0.3).restart();  
     d.fx = d.x;  
@@ -319,7 +319,7 @@ function dragended(event, d) {
 }  
 
 function ticked() {  
-    // 确保节点不会超出可视区域  
+    // Ensure nodes do not go beyond the visible area  
     graphData.nodes.forEach(function(d) {  
         d.x = Math.max(40, Math.min(width - 40, d.x));  
         d.y = Math.max(40, Math.min(height - 40, d.y));  
@@ -334,13 +334,13 @@ function ticked() {
     node.attr("transform", d => `translate(${d.x}, ${d.y})`);  
 }  
 
-// 历史正确率折线图  
+// Historical Accuracy Trend Line Chart  
 const trendData = [  
-    { time: "测验1", accuracy: 0.70 },  
-    { time: "测验2", accuracy: 0.72 },  
-    { time: "测验3", accuracy: 0.74 },  
-    { time: "测验4", accuracy: 0.77 },  
-    { time: "测验5", accuracy: 0.7894 }  
+    { time: "Test 1", accuracy: 0.70 },  
+    { time: "Test 2", accuracy: 0.72 },  
+    { time: "Test 3", accuracy: 0.74 },  
+    { time: "Test 4", accuracy: 0.77 },  
+    { time: "Test 5", accuracy: 0.7894 }  
 ];  
 
 const chartWidth = document.getElementById("line-chart").clientWidth;  
@@ -403,7 +403,7 @@ svgLine.selectAll(".dot")
     .attr("fill", "#ff5722")  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>正确率：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Accuracy：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
