@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>  
-<html lang="zh">  
+<html lang="en">  
 <head>  
     <meta charset="UTF-8" />  
-    <title>第5题 - 几何公理与线角关系</title>  
+    <title>Question 12 - Area Calculation</title>  
     <!-- Tailwind CSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
     <!-- D3.js v6 -->  
     <script src="https://d3js.org/d3.v6.min.js"></script>  
 
-    <!-- MathJax 引入 -->  
+    <!-- MathJax Integration -->  
     <script>  
         MathJax = {  
-            tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["$$", "$$"]] },  
+            tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["$$", "$$"]] },  
             svg: { fontCache: "global" }  
         };  
     </script>  
@@ -39,24 +38,24 @@
 <!-- 顶部：返回按钮 -->  
 <div class="p-4 bg-white shadow">  
     <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
-        返回题目列表  
+        Return to Question List  
     </button>  
 </div>  
 
-<!-- 主体：左侧力导向图 + 右侧题目信息 -->  
+<!-- 主体：左侧Force-Directed Graph + 右侧Question Information -->  
 <div class="flex h-[calc(100vh-64px)]">  
 
-    <!-- 左侧：力导向图 -->  
+    <!-- 左侧：Force-Directed Graph -->  
     <div id="left-panel" class="w-1/2 h-full bg-white relative">  
         <svg id="graph-svg" class="w-full h-full"></svg>  
         <div id="graph-tooltip" class="tooltip"></div>  
         
         <!-- 颜色对应正确率说明 -->  
         <div class="color-legend">  
-            <h3 class="text-sm font-bold mb-2">正确率说明:</h3>  
+            <h3 class="text-sm font-bold mb-2">Accuracy Level Explanation:</h3>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #ef4444;"></div>  
-                <span class="text-xs">低于40%</span>  
+                <span class="text-xs">Below 40%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #f97316;"></div>  
@@ -67,57 +66,44 @@
                 <span class="text-xs">60%-80%</span>  
             </div>  
             <div class="legend-item">  
-                <div class="legend-color" style="background-color: #22c55e;"></div>  
-                <span class="text-xs">大于80%</span>  
+                <div class="legend-color" style="background-color: #22c555;"></div>  
+                <span class="text-xs">Above 80%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #9ca3af;"></div>  
-                <span class="text-xs">相关知识点</span>  
+                <span class="text-xs">Related Knowledge Points</span>  
             </div>  
         </div>  
     </div>  
 
-    <!-- 右侧：题目信息和历史正确率折线图 -->  
+    <!-- 右侧：题目信息和历史趋势图 -->  
     <div id="right-panel" class="w-1/2 h-full flex flex-col p-4 space-y-4">  
 
         <!-- 题干描述区域 -->  
         <div class="bg-white p-4 rounded shadow">  
-            <h1 class="text-xl font-bold mb-2">题号：第5题 - 几何公理与线角关系</h1>  
+            <h1 class="text-xl font-bold mb-2">Question Number: 12</h1>  
+            <p class="mb-4">  
+                As shown in the diagram, in a rectangular lawn with a length of 8 meters and a width of 4 meters,  
+            </p>  
+            <p class="mb-4">  
+                the left boundary of the winding path is shifted 2 meters to the right to obtain the right boundary.  
+            </p>  
+            <p class="mb-4">  
+                The green area (shaded part) of this lawn is _____ square meters.  
+            </p>  
+
             <div class="mb-4">  
-                <p class="mb-2">下列命题中，是真命题的是（ ）</p>  
+                <label for="answer1" class="block mb-2">Green Area:</label>  
+                <input type="text" id="answer1" class="border p-2 rounded w-full" />  
             </div>  
             
-            <div class="space-y-4">  
-                <div class="flex items-center">  
-                    <input type="checkbox" id="option1" class="mr-2" />  
-                    <label for="option1">A. 两条直线被第三条直线所截，内错角相等</label>  
-                </div>  
-                <div class="flex items-center">  
-                    <input type="checkbox" id="option2" class="mr-2" />  
-                    <label for="option2">B. 直线外一点与直线上所有点的连线段中，垂线段最短</label>  
-                </div>  
-                <div class="flex items-center">  
-                    <input type="checkbox" id="option3" class="mr-2" />  
-                    <label for="option3">C. 过一点有且只有一条直线与已知直线垂直</label>  
-                </div>  
-                <div class="flex items-center">  
-                    <input type="checkbox" id="option4" class="mr-2" />  
-                    <label for="option4">D. 垂直于同一直线的两直线互相平行</label>  
-                </div>  
-            </div>  
-            
-            <div class="mt-4">  
-                <label for="answer" class="block mb-2">您的答案：</label>  
-                <input type="text" id="answer" class="border p-2 rounded w-full" />  
-            </div>  
-            
-            <p class="mt-4">当前掌握率：<span class="text-orange-600 font-medium">37.84%</span></p>  
-            <p>历史正确率：<span class="text-orange-600 font-medium">40%</span></p>  
+            <p>Current Mastery Rate：<span class="text-green-600 font-medium">52.63%</span></p>  
+            <p>Historical Accuracy Rate：<span class="text-yellow-600 font-medium">50%</span></p>  
         </div>  
 
-        <!-- 历史正确率折线图 -->  
+        <!-- Historical Accuracy Trend Line Chart -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
-            <h2 class="text-lg font-bold mb-2">历史正确率趋势</h2>  
+            <h2 class="text-lg font-bold mb-2">Historical Accuracy Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
             <div id="line-tooltip" class="tooltip"></div>  
         </div>  
@@ -125,99 +111,112 @@
 </div>  
 
 <script>  
-// ================ 知识点与示例题数据 ================  
+// Knowledge Points and Example Questions Data  
 const knowledgeQuestions = {  
-    "几何公理": {  
-        basic: "几何公理的基本概念",  
-        medium: "几何公理在图形中的应用",  
-        advanced: "几何公理的高级推理",  
-        accuracy: 0.35  
+    "Area Calculation": {   
+        basic: "Understanding basic rectangular area calculation",  
+        medium: "Subtracting partial areas from the whole",  
+        advanced: "Comprehensive area calculation for composite shapes",  
+        accuracy: 0.52  
     },  
-    "线与角的关系": {  
-        basic: "线与角的基本关系",  
-        medium: "线与角在几何推理中的应用",  
-        advanced: "线与角的高级关系",  
-        accuracy: 0.40  
+    "Geometric Shapes": {   
+        basic: "Basic concepts of geometric shapes",  
+        medium: "Direct area calculation of basic shapes",  
+        advanced: "Deriving area formulas for complex shapes",  
+        accuracy: 0.50  
     },  
-    "平行与垂直": {  
-        basic: "平行与垂直的基本概念",  
-        medium: "平行与垂直在图形中的应用",  
-        advanced: "平行与垂直的高级应用",  
-        accuracy: 0.38  
+    "Path Calculation": {   
+        basic: "Understanding offset paths and their areas",  
+        medium: "Simple area subtraction problems",  
+        advanced: "Advanced path and area calculations",  
+        accuracy: 0.48  
     },  
-    "内错角与平行线": {  
-        basic: "内错角的基本概念",  
-        medium: "内错角在平行线判断中的应用",  
-        advanced: "内错角的高级应用",  
-        accuracy: 0.39  
+    "Composite Areas": {   
+        basic: "Splitting areas into manageable regions",  
+        medium: "Calculating areas of composite planar regions",  
+        advanced: "Solving complex composite area problems",  
+        accuracy: 0.45  
     },  
-    "垂线的性质": {  
-        basic: "垂线的基本概念",  
-        medium: "垂线在几何中的应用",  
-        advanced: "垂线的高级性质",  
-        accuracy: 0.36  
+    "Basic 2D Geometry": {   
+        basic: "Understanding points, lines, and planes",  
+        medium: "Properties of basic geometric shapes",  
+        advanced: "Applying spatial geometry",  
+        accuracy: 0.50  
     },  
-    "角的平分线性质": {  
-        basic: "角平分线的基本概念",  
-        medium: "角平分线在三角形中的应用",  
-        advanced: "角平分线的高级性质",  
-        accuracy: 0.37  
+    "Parallelogram Area Calculation": {   
+        basic: "Calculating area using base and height",  
+        medium: "Area of inclined parallelograms",  
+        advanced: "Decomposing complex shapes into parallelograms",  
+        accuracy: 0.51  
     },  
-    "平行线的公理": {  
-        basic: "平行线公理的基本概念",  
-        medium: "平行线公理在几何中的应用",  
-        advanced: "平行线公理的高级应用",  
-        accuracy: 0.34  
+    "Triangle Area Calculation": {   
+        basic: "Calculating area using base and height formula",  
+        medium: "Applying Heron's formula",  
+        advanced: "Dividing shapes into multiple triangles for area calculation",  
+        accuracy: 0.49  
     },  
-    "例题 1": {  
-        basic: "简单垂线性质的应用",  
-        medium: "复杂垂线问题的解决",  
-        advanced: "高级垂线性质的应用",  
-        accuracy: 0.41,  
-        related: true  
+    "Circle Area Calculation": {   
+        basic: "Understanding the basic area formula for circles",  
+        medium: "Calculating areas of sectors and annuli",  
+        advanced: "Composite areas involving circles and other shapes",  
+        accuracy: 0.53  
     },  
-    "例题 2": {  
-        basic: "简单角度关系的应用",  
-        medium: "复杂角度问题的解决",  
-        advanced: "高级角度关系的应用",  
-        accuracy: 0.42,  
-        related: true  
+    "Composite Shape Area Division": {   
+        basic: "Dividing composite shapes into simple shapes",  
+        medium: "Calculating individual areas and summing them up",  
+        advanced: "Handling complex intersecting shapes",  
+        accuracy: 0.47  
     }  
 };  
 
-// ================ 力导向图数据 ================  
+// Force-Directed Graph Data  
 const graphData = {  
     nodes: [  
-        { id: "Q5", type: "question", name: "第5题", accuracy: 0.3784 },  
-        { id: "K1", type: "knowledge", name: "几何公理", accuracy: 0.35 },  
-        { id: "K2", type: "knowledge", name: "线与角的关系", accuracy: 0.40 },  
-        { id: "K3", type: "knowledge", name: "平行与垂直", accuracy: 0.38 },  
-        { id: "K4", type: "knowledge", name: "内错角与平行线", accuracy: 0.39 },  
-        { id: "K5", type: "knowledge", name: "垂线的性质", accuracy: 0.36 },  
-        { id: "K6", type: "knowledge", name: "角的平分线性质", accuracy: 0.37 },  
-        { id: "K7", type: "knowledge", name: "平行线的公理", accuracy: 0.34 },  
-        { id: "E1", type: "example", name: "例题 1", accuracy: 0.41, related: true },  
-        { id: "E2", type: "example", name: "例题 2", accuracy: 0.42, related: true }  
+        { id: "Q12", type: "question", name: "Question 12", accuracy: 0.52 },  
+        { id: "K1", type: "knowledge", name: "Area Calculation", accuracy: 0.52 },  
+        { id: "K2", type: "knowledge", name: "Geometric Shapes", accuracy: 0.50 },  
+        { id: "K3", type: "knowledge", name: "Path Calculation", accuracy: 0.48 },  
+        { id: "K4", type: "knowledge", name: "Composite Areas", accuracy: 0.45 },  
+        { id: "K5", type: "knowledge", name: "Basic 2D Geometry", accuracy: 0.50 },  
+        { id: "K6", type: "knowledge", name: "Parallelogram Area Calculation", accuracy: 0.51 },  
+        { id: "K7", type: "knowledge", name: "Triangle Area Calculation", accuracy: 0.49 },  
+        { id: "K8", type: "knowledge", name: "Circle Area Calculation", accuracy: 0.53 }  
     ],  
     links: [  
-        { source: "Q5", target: "K1" },  
-        { source: "Q5", target: "K2" },  
-        { source: "Q5", target: "K3" },  
-        { source: "Q5", target: "K4" },  
-        { source: "Q5", target: "K5" },  
-        { source: "Q5", target: "K6" },  
-        { source: "Q5", target: "K7" },  
-        { source: "K1", target: "E1" },  
-        { source: "K2", target: "E2" },  
-        { source: "K3", target: "E1" },  
-        { source: "K4", target: "E1" },  
-        { source: "K5", target: "E2" },  
-        { source: "K6", target: "E2" },  
-        { source: "K7", target: "E2" }  
+        { source: "Q12", target: "K1" },  
+        { source: "Q12", target: "K2" },  
+        { source: "Q12", target: "K3" },  
+        { source: "Q12", target: "K4" },  
+        { source: "K1", target: "K5" },  
+        { source: "K1", target: "K6" },  
+        { source: "K1", target: "K7" },  
+        { source: "K1", target: "K8" },  
+        { source: "K2", target: "K3" },  
+        { source: "K3", target: "K4" },  
+        { source: "K5", target: "K6" },  
+        { source: "K6", target: "K7" },  
+        { source: "K7", target: "K8" }  
     ]  
 };  
 
-// ================ 力导向图实现 ================  
+// Node Color Function  
+function getNodeColor(d) {  
+    if (d.type === "question") {   
+        return "#fca5a5"; // Question node color  
+    }  
+    
+    if (d.related) {   
+        return "#9ca3af"; // Related knowledge points in gray  
+    }  
+    
+    const acc = d.accuracy;  
+    if (acc < 0.4) return "#ef4444"; // Red for below 40%  
+    if (acc < 0.6) return "#f97316"; // Orange for 40%-60%  
+    if (acc < 0.8) return "#eab308"; // Yellow for 60%-80%  
+    return "#22c555"; // Green for above 80%  
+}  
+
+// Draw Force-Directed Graph  
 const width = document.getElementById("left-panel").clientWidth;  
 const height = document.getElementById("left-panel").clientHeight;  
 
@@ -225,11 +224,12 @@ const svgGraph = d3.select("#graph-svg")
     .attr("width", width)  
     .attr("height", height);  
 
+// Enhanced Force-Directed Graph Configuration  
 const simulation = d3.forceSimulation(graphData.nodes)  
     .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))  
     .force("charge", d3.forceManyBody().strength(-600))  
     .force("center", d3.forceCenter(width / 2, height / 2))  
-    .force("collision", d3.forceCollide().radius(60))  
+    .force("collision", d3.forceCollide().radius(60)) // Enhanced collision detection  
     .on("tick", ticked);  
 
 const link = svgGraph.selectAll("line.link")  
@@ -243,7 +243,7 @@ const node = svgGraph.selectAll("g.node")
     .enter()  
     .append("g")  
     .attr("class", "node")  
-    .call(d3.drag()  
+    .call(d3.drag() // Add drag functionality  
         .on("start", dragstarted)  
         .on("drag", dragged)  
         .on("end", dragended));  
@@ -252,26 +252,22 @@ const tooltipGraph = d3.select("#graph-tooltip");
 
 node.append("circle")  
     .attr("r", d => d.type === "question" ? 18 : 14)  
-    .attr("fill", d => {  
-        if (d.type === "question") return "#fca5a5";  
-        return d.type === "example" ? "#9ca3af" : getNodeColor(d);  
-    })  
-    .on("mouseover", (event, d) => {  
+    .attr("fill", d => getNodeColor(d))  
+    .on("mouseover", (event, d) => {   
         let htmlStr = "";  
-        if (d.type === "question") {  
-            htmlStr = `题号：<strong>${d.name}</strong>`;  
-        } else {  
-            htmlStr = `知识点：<strong>${d.name}</strong>`;  
+        if (d.type === "question") {   
+            htmlStr = `Question：<strong>${d.name}</strong>`;  
+        } else {   
+            htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
-            if (qSet) {  
+            if (qSet) {   
                 htmlStr += `  
-                    <br/><strong>基础题：</strong>${qSet.basic}  
-                    <br/><strong>中等题：</strong>${qSet.medium}  
-                    <br/><strong>较难题：</strong>${qSet.advanced}  
-                    <br/><strong>正确率：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
-                `;  
-            } else {  
-                htmlStr += "<br/>暂无示例题";  
+                    <br/><strong>Basic：</strong>${qSet.basic}  
+                    <br/><strong>Medium：</strong>${qSet.medium}  
+                    <br/><strong>Advanced：</strong>${qSet.advanced}  
+                    <br/><strong>Accuracy：</strong>${(qSet.accuracy * 100).toFixed(1)}%`;  
+            } else {   
+                htmlStr += "<br/>No example questions available";  
             }  
         }  
         tooltipGraph  
@@ -290,6 +286,7 @@ node.append("text")
     .attr("fill", "#333")  
     .attr("font-weight", d => (d.type === "question" ? "bold" : "normal"));  
 
+// Drag Functionality Implementation  
 function dragstarted(event, d) {  
     if (!event.active) simulation.alphaTarget(0.3).restart();  
     d.fx = d.x;  
@@ -308,7 +305,8 @@ function dragended(event, d) {
 }  
 
 function ticked() {  
-    graphData.nodes.forEach(function(d) {  
+    // Ensure nodes do not go beyond the visible area  
+    graphData.nodes.forEach(function(d) {   
         d.x = Math.max(40, Math.min(width - 40, d.x));  
         d.y = Math.max(40, Math.min(height - 40, d.y));  
     });  
@@ -322,20 +320,13 @@ function ticked() {
     node.attr("transform", d => `translate(${d.x}, ${d.y})`);  
 }  
 
-function getNodeColor(d) {  
-    const acc = d.accuracy;  
-    if (acc < 0.4) return "#ef4444";  
-    if (acc < 0.6) return "#f97316";  
-    if (acc < 0.8) return "#eab308";  
-    return "#22c55e";  
-}  
-
-// ================ 历史正确率折线图 ================  
+// Historical Accuracy Trend Line Chart  
 const trendData = [  
-    { time: "测验1", accuracy: 0.30 },  
-    { time: "测验2", accuracy: 0.35 },  
-    { time: "测验3", accuracy: 0.40 },  
-    { time: "当前", accuracy: 0.3784 }  
+    { time: "Test 1", accuracy: 0.45 },  
+    { time: "Test 2", accuracy: 0.48 },  
+    { time: "Test 3", accuracy: 0.50 },  
+    { time: "Test 4", accuracy: 0.52 },  
+    { time: "Test 5", accuracy: 0.52 }  
 ];  
 
 const chartWidth = document.getElementById("line-chart").clientWidth;  
@@ -351,7 +342,7 @@ const xScale = d3.scalePoint()
     .padding(0.5);  
 
 const yScale = d3.scaleLinear()  
-    .domain([0.25, 0.5])  
+    .domain([0.4, 0.6])  
     .range([innerHeight, 0]);  
 
 const svgLine = d3.select("#line-chart")  
@@ -398,7 +389,7 @@ svgLine.selectAll(".dot")
     .attr("fill", "#ff5722")  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>正确率：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Accuracy：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
@@ -407,6 +398,6 @@ svgLine.selectAll(".dot")
         tooltipLine.style("opacity", 0);  
     });  
 </script>  
+<div id="line-tooltip" class="tooltip"></div>  
 </body>  
 </html>  
-
