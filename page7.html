@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>  
-<html lang="zh">  
+<html lang="en">  
 <head>  
     <meta charset="UTF-8" />  
-    <title>第7题 - 数轴问题</title>  
+    <title>Question 7 - Number Line Problem</title>  
     <!-- Tailwind CSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
     <!-- D3.js v6 -->  
     <script src="https://d3js.org/d3.v6.min.js"></script>  
 
-    <!-- MathJax 引入 -->  
+    <!-- MathJax -->  
     <script>  
         MathJax = {  
             tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["$$", "$$"]] },  
@@ -37,27 +36,27 @@
 </head>  
 <body class="h-screen w-screen overflow-hidden bg-gray-100">  
 
-<!-- 顶部：返回按钮 -->  
+<!-- Top Navigation -->  
 <div class="p-4 bg-white shadow">  
     <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
-        返回题目列表  
+        Return to Question List  
     </button>  
 </div>  
 
-<!-- 主体：左侧力导向图 + 右侧题目信息 -->  
+<!-- Main Content -->  
 <div class="flex h-[calc(100vh-64px)]">  
 
-    <!-- 左侧：力导向图 -->  
+    <!-- Left Panel: Force Directed Graph -->  
     <div id="left-panel" class="w-1/2 h-full bg-white relative">  
         <svg id="graph-svg" class="w-full h-full"></svg>  
         <div id="graph-tooltip" class="tooltip"></div>  
         
-        <!-- 颜色对应正确率说明 -->  
+        <!-- Color Legend -->  
         <div class="color-legend">  
-            <h3 class="text-sm font-bold mb-2">正确率说明:</h3>  
+            <h3 class="text-sm font-bold mb-2">Accuracy Rate Explanation:</h3>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #ef4444;"></div>  
-                <span class="text-xs">低于40%</span>  
+                <span class="text-xs">Below 40%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #f97316;"></div>  
@@ -69,44 +68,44 @@
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #22c55e;"></div>  
-                <span class="text-xs">大于80%</span>  
+                <span class="text-xs">Above 80%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #9ca3af;"></div>  
-                <span class="text-xs">相关知识点</span>  
+                <span class="text-xs">Related Knowledge Points</span>  
             </div>  
         </div>  
     </div>  
 
-    <!-- 右侧：题目信息和历史趋势图 -->  
+    <!-- Right Panel: Question Information -->  
     <div id="right-panel" class="w-1/2 h-full flex flex-col p-4 space-y-4">  
 
-        <!-- 题目信息 -->  
+        <!-- Question Information -->  
         <div class="bg-white p-4 rounded shadow">  
-            <h1 class="text-xl font-bold mb-2">题号：第7题</h1>  
+            <h1 class="text-xl font-bold mb-2">Question Number: Question 7</h1>  
             <p class="mb-4">  
-                实数a，b，c在数轴上对应的点的位置如图所示，则  
-                \(\sqrt{c^2 - (\sqrt{a})^2} + (\sqrt[3]{a + b})^3\)的值为（ ）  
+                Given the positions of real numbers \(a\), \(b\), and \(c\) on the number line as shown,  
+                find the value of \(\sqrt{c^2 - (\sqrt{a})^2} + (\sqrt[3]{a + b})^3\).  
             </p>  
             
-            <!-- 数轴图示 -->  
+            <!-- Number Line Illustration -->  
             <div class="number-line mb-4">  
                 <svg width="100%" height="60">  
-                    <!-- 数轴 -->  
+                    <!-- Number line -->  
                     <line x1="40" y1="30" x2="460" y2="30" stroke="black" stroke-width="2"></line>  
-                    <!-- 原点 -->  
+                    <!-- Origin -->  
                     <line x1="250" y1="25" x2="250" y2="35" stroke="black" stroke-width="2"></line>  
                     <text x="250" y="50" text-anchor="middle">0</text>  
                     
-                    <!-- 点a -->  
+                    <!-- Point a -->  
                     <circle cx="100" cy="30" r="5" fill="#4287f5"></circle>  
                     <text x="100" y="20" text-anchor="middle">a</text>  
                     
-                    <!-- 点b -->  
+                    <!-- Point b -->  
                     <circle cx="300" cy="30" r="5" fill="#42f56f"></circle>  
                     <text x="300" y="20" text-anchor="middle">b</text>  
                     
-                    <!-- 点c -->  
+                    <!-- Point c -->  
                     <circle cx="380" cy="30" r="5" fill="#f54242"></circle>  
                     <text x="380" y="20" text-anchor="middle">c</text>  
                 </svg>  
@@ -128,13 +127,13 @@
                 <input type="checkbox" id="option4" />  
                 <label for="option4">D. \(-b - c\)</label>  
             </div>  
-            <p>当前掌握率：<span class="text-green-600 font-medium">35.14%</span></p>  
-            <p>历史正确率：<span class="text-yellow-600 font-medium">35%</span></p>  
+            <p>Current mastery rate：<span class="text-green-600 font-medium">35.14%</span></p>  
+            <p>History correct rate：<span class="text-yellow-600 font-medium">35%</span></p>  
         </div>  
 
-        <!-- 历史正确率折线图 -->  
+        <!-- History Correct Rate Line Chart -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
-            <h2 class="text-lg font-bold mb-2">历史正确率趋势</h2>  
+            <h2 class="text-lg font-bold mb-2">History Correct Rate Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
             <div id="line-tooltip" class="tooltip"></div>  
         </div>  
@@ -142,86 +141,86 @@
 </div>  
 
 <script>  
-// 知识点与示例题数据  
+// ================ Knowledge Points and Example Questions Data ================  
 const knowledgeQuestions = {  
-    "平方根的性质": {  
-        basic: "理解平方根的定义与性质",  
-        medium: "掌握平方根的计算与应用",  
-        advanced: "应用平方根和立方根解决问题",  
+    "Properties of Square Roots": {  
+        basic: "Understanding the definition and properties of square roots",  
+        medium: "Mastering the calculation and application of square roots",  
+        advanced: "Applying square roots and cube roots to solve problems",  
         accuracy: 0.35  
     },  
-    "立方根的性质": {  
-        basic: "了解立方根的定义及其计算",  
-        medium: "掌握立方根在方程中的应用",  
-        advanced: "讨论包含立方根的代数式",  
+    "Properties of Cube Roots": {  
+        basic: "Understanding the definition and calculation of cube roots",  
+        medium: "Mastering the application of cube roots in equations",  
+        advanced: "Discussing algebraic expressions containing cube roots",  
         accuracy: 0.38  
     },  
-    "数轴模型扩展": {  
-        basic: "理解数轴基本模型",  
-        medium: "解决数轴与代数结合问题",  
-        advanced: "拓展数轴模型到更复杂的组合问题",  
+    "Number Line Model Extension": {  
+        basic: "Understanding the basic number line model",  
+        medium: "Solving algebra problems combined with the number line",  
+        advanced: "Extending the number line model to more complex combination problems",  
         accuracy: 0.42  
     },  
-    "代数式求值": {  
-        basic: "代数式的基本求值方法",  
-        medium: "复杂代数式求值技巧",  
-        advanced: "求代数式的值域与应用",  
+    "Algebraic Expression Evaluation": {  
+        basic: "Basic methods for evaluating algebraic expressions",  
+        medium: "Advanced techniques for evaluating complex algebraic expressions",  
+        advanced: "Finding the range of algebraic expressions and their applications",  
         accuracy: 0.58  
     },  
-    "根式运算规则": {  
-        basic: "根式的定义与性质",  
-        medium: "根式的四则运算",  
-        advanced: "根式的变形与化简",  
+    "Rules of Radicals": {  
+        basic: "Definition and properties of radicals",  
+        medium: "Four arithmetic operations with radicals",  
+        advanced: "Transforming and simplifying radicals",  
         accuracy: 0.45  
     },  
-    "代数式的化简": {  
-        basic: "合并同类项与化简",  
-        medium: "复杂代数式的化简技巧",  
-        advanced: "应用因式分解化简代数式",  
+    "Simplification of Algebraic Expressions": {  
+        basic: "Combining like terms and simplifying",  
+        medium: "Advanced techniques for simplifying complex algebraic expressions",  
+        advanced: "Applying factoring to simplify algebraic expressions",  
         accuracy: 0.62  
     },  
-    "幂的运算": {  
-        basic: "幂的定义与基本性质",  
-        medium: "幂的运算法则",  
-        advanced: "幂与根式的转换",  
+    "Exponent Operations": {  
+        basic: "Definition and properties of exponents",  
+        median: "Rules of exponent operations",  
+        advanced: "Conversion between exponents and radicals",  
         accuracy: 0.75  
     },  
-    "数学建模思想": {  
-        basic: "数学模型的基本概念",  
-        medium: "用数学语言表达实际问题",  
-        advanced: "构建和分析数学模型",  
+    "Mathematical Modeling Concepts": {  
+        basic: "Basic concept of mathematical models",  
+        medium: "Expressing real-world problems with mathematical language",  
+        advanced: "Constructing and analyzing mathematical models",  
         accuracy: 0.53  
     },  
-    "函数与图像": {  
-        basic: "函数的概念与表示",  
-        medium: "函数图像与性质",  
-        advanced: "函数图像与代数关系",  
+    "Functions and Graphs": {  
+        basic: "Concept and representation of functions",  
+        medium: "Properties and graphs of functions",  
+        advanced: "Relationship between function graphs and algebraic relationships",  
         accuracy: 0.68,  
         related: true  
     },  
-    "实数性质": {  
-        basic: "实数的定义与分类",  
-        medium: "实数的性质与运算",  
-        advanced: "实数在数轴上的表示",  
+    "Real Number Properties": {  
+        basic: "Definition and classification of real numbers",  
+        medium: "Properties and operations of real numbers",  
+        advanced: "Representation of real numbers on the number line",  
         accuracy: 0.72,  
         related: true  
     }  
 };  
 
-// 力导向图数据  
+// ================ Force Directed Graph Data ================  
 const graphData = {  
     nodes: [  
-        { id: "Q7", type: "question", name: "第7题", accuracy: 0.35 },  
-        { id: "K1", type: "knowledge", name: "平方根的性质", accuracy: 0.35 },  
-        { id: "K2", type: "knowledge", name: "立方根的性质", accuracy: 0.38 },  
-        { id: "K3", type: "knowledge", name: "数轴模型扩展", accuracy: 0.42 },  
-        { id: "K4", type: "knowledge", name: "代数式求值", accuracy: 0.58 },  
-        { id: "K5", type: "knowledge", name: "根式运算规则", accuracy: 0.45 },  
-        { id: "K6", type: "knowledge", name: "代数式的化简", accuracy: 0.62 },  
-        { id: "K7", type: "knowledge", name: "幂的运算", accuracy: 0.75 },  
-        { id: "K8", type: "knowledge", name: "数学建模思想", accuracy: 0.53 },  
-        { id: "K9", type: "knowledge", name: "函数与图像", accuracy: 0.68, related: true },  
-        { id: "K10", type: "knowledge", name: "实数性质", accuracy: 0.72, related: true }  
+        { id: "Q7", type: "question", name: "Question 7", accuracy: 0.35 },  
+        { id: "K1", type: "knowledge", name: "Properties of Square Roots", accuracy: 0.35 },  
+        { id: "K2", type: "knowledge", name: "Properties of Cube Roots", accuracy: 0.38 },  
+        { id: "K3", type: "knowledge", name: "Number Line Model Extension", accuracy: 0.42 },  
+        { id: "K4", type: "knowledge", name: "Algebraic Expression Evaluation", accuracy: 0.58 },  
+        { id: "K5", type: "knowledge", name: "Rules of Radicals", accuracy: 0.45 },  
+        { id: "K6", type: "knowledge", name: "Simplification of Algebraic Expressions", accuracy: 0.62 },  
+        { id: "K7", type: "knowledge", name: "Exponent Operations", accuracy: 0.75 },  
+        { id: "K8", type: "knowledge", name: "Mathematical Modeling Concepts", accuracy: 0.53 },  
+        { id: "K9", type: "knowledge", name: "Functions and Graphs", accuracy: 0.68, related: true },  
+        { id: "K10", type: "knowledge", name: "Real Number Properties", accuracy: 0.72, related: true }  
     ],  
     links: [  
         { source: "Q7", target: "K1" },  
@@ -238,24 +237,24 @@ const graphData = {
     ]  
 };  
 
-// 获取颜色函数  
+// ================ Node Color Function ================  
 function getNodeColor(d) {  
     if (d.type === "question") {  
-        return "#fca5a5"; // 题目节点颜色  
+        return "#fca5a5"; // Question node color  
     }  
     
     if (d.related) {  
-        return "#9ca3af"; // 相关知识点为灰色  
+        return "#9ca3af"; // Related knowledge points in gray  
     }  
     
     const acc = d.accuracy;  
-    if (acc < 0.4) return "#ef4444"; // 红色，低于40%  
-    if (acc < 0.6) return "#f97316"; // 橙色，40%-60%  
-    if (acc < 0.8) return "#eab308"; // 黄色，60%-80%  
-    return "#22c55e"; // 绿色，大于80%  
+    if (acc < 0.4) return "#ef4444"; // Red, Below 40%  
+    if (acc < 0.6) return "#f97316"; // Orange, 40%-60%  
+    if (acc < 0.8) return "#eab308"; // Yellow, 60%-80%  
+    return "#22c555"; // Green, Above 80%  
 }  
 
-// 力导向图绘制  
+// ================ Force Directed Graph Implementation ================  
 const width = document.getElementById("left-panel").clientWidth;  
 const height = document.getElementById("left-panel").clientHeight;  
 
@@ -263,12 +262,12 @@ const svgGraph = d3.select("#graph-svg")
     .attr("width", width)  
     .attr("height", height);  
 
-// 增加排斥力和距离以防止节点重叠  
+// Enhanced Simulation with Increased Repulsion and Collision Detection  
 const simulation = d3.forceSimulation(graphData.nodes)  
     .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))  
     .force("charge", d3.forceManyBody().strength(-500))  
     .force("center", d3.forceCenter(width / 2, height / 2))  
-    .force("collision", d3.forceCollide().radius(60)) // 添加碰撞检测以防止重叠  
+    .force("collision", d3.forceCollide().radius(60))  
     .on("tick", ticked);  
 
 const link = svgGraph.selectAll("line.link")  
@@ -295,19 +294,19 @@ node.append("circle")
     .on("mouseover", (event, d) => {  
         let htmlStr = "";  
         if (d.type === "question") {  
-            htmlStr = `题号：<strong>${d.name}</strong>`;  
+            htmlStr = `Question：<strong>${d.name}</strong>`;  
         } else {  
-            htmlStr = `知识点：<strong>${d.name}</strong>`;  
+            htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
             if (qSet) {  
                 htmlStr += `  
-                    <br/><strong>基础题：</strong>${qSet.basic}  
-                    <br/><strong>中等题：</strong>${qSet.medium}  
-                    <br/><strong>较难题：</strong>${qSet.advanced}  
-                    <br/><strong>正确率：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
+                    <br/><strong>Basic：</strong>${qSet.basic}  
+                    <br/><strong>Medium：</strong>${qSet.medium}  
+                    <br/><strong>Advanced：</strong>${qSet.advanced}  
+                    <br/><strong>Accuracy：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
                 `;  
             } else {  
-                htmlStr += "<br/>暂无示例题";  
+                htmlStr += "<br/>No example available";  
             }  
         }  
         tooltipGraph  
@@ -326,7 +325,7 @@ node.append("text")
     .attr("fill", "#333")  
     .attr("font-weight", d => (d.type === "question" ? "bold" : "normal"));  
 
-// 拖拽功能  
+// ================ Drag and Drop Functionality ================  
 function dragstarted(event, d) {  
     if (!event.active) simulation.alphaTarget(0.3).restart();  
     d.fx = d.x;  
@@ -345,12 +344,12 @@ function dragended(event, d) {
 }  
 
 function ticked() {  
-    // 确保节点不会跑出可视区域  
+    // Ensure nodes stay within the visible area  
     graphData.nodes.forEach(function(d) {  
         d.x = Math.max(30, Math.min(width - 30, d.x));  
         d.y = Math.max(30, Math.min(height - 30, d.y));  
     });  
-    
+
     link  
         .attr("x1", d => d.source.x)  
         .attr("y1", d => d.source.y)  
@@ -360,13 +359,13 @@ function ticked() {
     node.attr("transform", d => `translate(${d.x}, ${d.y})`);  
 }  
 
-// 历史正确率折线图  
+// ================ History Correct Rate Line Chart ================  
 const trendData = [  
-    { time: "测验1", accuracy: 0.29 },  
-    { time: "测验2", accuracy: 0.33 },  
-    { time: "测验3", accuracy: 0.31 },  
-    { time: "测验4", accuracy: 0.34 },  
-    { time: "测验5", accuracy: 0.35 }  
+    { time: "Test 1", accuracy: 0.29 },  
+    { time: "Test 2", accuracy: 0.33 },  
+    { time: "Test 3", accuracy: 0.31 },  
+    { time: "Test 4", accuracy: 0.34 },  
+    { time: "Test 5", accuracy: 0.35 }  
 ];  
 
 const lineChartWidth = document.getElementById("line-chart").clientWidth;  
@@ -426,7 +425,7 @@ svgLine.selectAll(".dot")
     .attr("cy", d => yScale(d.accuracy))  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>正确率：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Accuracy Rate：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
@@ -436,4 +435,4 @@ svgLine.selectAll(".dot")
     });  
 </script>  
 </body>  
-</html>  
+</html>
