@@ -44,6 +44,52 @@
 
 <!-- 主体：左侧力导向图 + 右侧题目信息 -->  
 <div class="flex h-[calc(100vh-64px)]">  
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8" />  
+    <title>Question 10 - Geometry Problem</title>  
+    <!-- Tailwind CSS -->  
+    <script src="https://cdn.tailwindcss.com"></script>  
+    <!-- D3.js v6 -->  
+    <script src="https://d3js.org/d3.v6.min.js"></script>  
+
+    <!-- MathJax 引入 -->  
+    <script>  
+        MathJax = {  
+            tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["$$", "$$"]] },  
+            svg: { fontCache: "global" }  
+        };  
+    </script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.min.js"></script>  
+
+    <style>  
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #f6f9fc; }  
+        .node circle { cursor: pointer; }  
+        .node circle:hover { fill: #555; }  
+        .node text { pointer-events: none; font-size: 12px; fill: #333; }  
+        line.link { stroke: #ccc; stroke-width: 1.5px; }  
+        .tooltip { position: absolute; min-width: 150px; padding: 8px; font-size: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #ddd; border-radius: 4px; pointer-events: none; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); opacity: 0; transition: opacity 0.2s; z-index: 999; }  
+        .line { fill: none; stroke-width: 2px; }  
+        .line-chart-axis path, .line-chart-axis line { fill: none; stroke: #ccc; }  
+        .dot { fill: #ff5722; stroke: #fff; stroke-width: 1px; cursor: pointer; }  
+        .dot:hover { opacity: 0.8; }  
+        .color-legend { position: absolute; bottom: 20px; left: 20px; background: rgba(255, 255, 255, 0.95); padding: 10px; border-radius: 4px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }  
+        .legend-item { display: flex; align-items: center; margin-bottom: 5px; }  
+        .legend-color { width: 16px; height: 16px; margin-right: 8px; border-radius: 50%; }  
+    </style>  
+</head>  
+<body class="h-screen w-screen overflow-hidden bg-gray-100">  
+
+<!-- 顶部：返回按钮 -->  
+<div class="p-4 bg-white shadow">  
+    <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
+        Return to Question List  
+    </button>  
+</div>  
+
+<!-- 主体：左侧力导向图 + 右侧题目信息 -->  
+<div class="flex h-[calc(100vh-64px)]">  
 
     <!-- 左侧：力导向图 -->  
     <div id="left-panel" class="w-1/2 h-full bg-white relative">  
@@ -52,10 +98,10 @@
         
         <!-- 颜色对应正确率说明 -->  
         <div class="color-legend">  
-            <h3 class="text-sm font-bold mb-2">正确率说明:</h3>  
+            <h3 class="text-sm font-bold mb-2">Accuracy Level Explanation:</h3>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #ef4444;"></div>  
-                <span class="text-xs">低于40%</span>  
+                <span class="text-xs">Below 40%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #f97316;"></div>  
@@ -67,11 +113,11 @@
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #22c55e;"></div>  
-                <span class="text-xs">大于80%</span>  
+                <span class="text-xs">Above 80%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #9ca3af;"></div>  
-                <span class="text-xs">相关知识点</span>  
+                <span class="text-xs">Related Knowledge Points</span>  
             </div>  
         </div>  
     </div>  
@@ -81,12 +127,12 @@
 
         <!-- 题干描述区域 -->  
         <div class="bg-white p-4 rounded shadow">  
-            <h1 class="text-xl font-bold mb-2">题号：第10题</h1>  
+            <h1 class="text-xl font-bold mb-2">Question Number: 10</h1>  
             <p class="mb-4">  
-                如图，\(AB\) 与 \(HN\) 交于点 \(E\)，点 \(G\) 在直线 \(CD\) 上，\(GF\) 交 \(AB\) 于点 \(M\)，  
-                \(\angle FMA = \angle FGC\)，\(\angle FEN = 2\angle NEB\)，  
-                \(\angle EHG = 2\angle EFM\)，\(\angle EHG + \angle EFM = 90°\);  
-                \(3\angle EHG - \angle EFM = 180°\)。  
+                As shown in the figure, line \(AB\) intersects line \(HN\) at point \(E\). Point \(G\) is on line \(CD\), and line \(GF\) intersects \(AB\) at point \(M\).  
+                \(\angle FMA = \angle FGC\), \(\angle FEN = 2\angle NEB\),  
+                \(\angle EHG = 2\angle EFM\), \(\angle EHG + \angle EFM = 90^\circ\);  
+                \(3\angle EHG - \angle EFM = 180^\circ\).  
             </p>  
             <div class="mb-4">  
                 <input type="checkbox" id="option1" />  
@@ -104,13 +150,13 @@
                 <input type="checkbox" id="option4" />  
                 <label for="option4">D. ①②④</label>  
             </div>  
-            <p>当前掌握率：<span class="text-red-600 font-medium">7.89%</span></p>  
-            <p>历史正确率：<span class="text-red-600 font-medium">7.8%</span></p>  
+            <p>Current Mastery Rate：<span class="text-red-600 font-medium">7.89%</span></p>  
+            <p>Historical Accuracy Rate：<span class="text-red-600 font-medium">7.8%</span></p>  
         </div>  
 
-        <!-- 历史正确率折线图 -->  
+        <!-- Historical Accuracy Trend Line Chart -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
-            <h2 class="text-lg font-bold mb-2">历史正确率趋势</h2>  
+            <h2 class="text-lg font-bold mb-2">Historical Accuracy Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
             <div id="line-tooltip" class="tooltip"></div>  
         </div>  
@@ -118,59 +164,59 @@
 </div>  
 
 <script>  
-// 知识点与示例题数据  
+// Knowledge points and example questions data  
 const knowledgeQuestions = {  
-    "几何性质": {  
-        basic: "基本几何图形性质",  
-        medium: "几何图形角度关系",  
-        advanced: "复杂几何推理",  
+    "Geometric Properties": {  
+        basic: "Basic properties of geometric shapes",  
+        medium: "Angle relationships in geometry",  
+        advanced: "Complex geometric reasoning",  
         accuracy: 0.12  
     },  
-    "角的关系": {  
-        basic: "了解角的基本性质",  
-        medium: "角的计算与推导",  
-        advanced: "角关系应用",  
+    "Angle Relationships": {  
+        basic: "Basic properties of angles",  
+        medium: "Calculation and deduction of angles",  
+        advanced: "Applications of angle relationships",  
         accuracy: 0.08  
     },  
-    "相似三角形": {  
-        basic: "相似定义与公式",  
-        medium: "相似三角形面积关系",  
-        advanced: "相似三角形复杂几何推论",  
+    "Similar Triangles": {  
+        basic: "Definition and formula of similar triangles",  
+        medium: "Area relationships of similar triangles",  
+        advanced: "Complex geometric reasoning with similar triangles",  
         accuracy: 0.15,  
         related: true  
     },  
-    "线角关系": {  
-        basic: "线与角的定义",  
-        medium: "线段切割与角度",  
-        advanced: "复杂线角问题建模",  
+    "Line-Angle Relationships": {  
+        basic: "Definition of lines and angles",  
+        medium: "Angles formed by line intersections",  
+        advanced: "Complex line-angle problems",  
         accuracy: 0.07  
     },  
-    "几何图形定理": {  
-        basic: "基本几何定理",  
-        medium: "几何定理的应用",  
-        advanced: "几何定理的推广",  
+    "Geometric Theorems": {  
+        basic: "Basic geometric theorems",  
+        medium: "Applications of geometric theorems",  
+        advanced: "Generalization of geometric theorems",  
         accuracy: 0.21,  
         related: true  
     },  
-    "三角形全等": {  
-        basic: "全等三角形判定方法",  
-        medium: "全等三角形性质应用",  
-        advanced: "复杂全等问题",  
+    "Triangle Congruence": {  
+        basic: "Methods for determining congruent triangles",  
+        medium: "Properties and applications of congruent triangles",  
+        advanced: "Complex problems involving triangle congruence",  
         accuracy: 0.35,  
         related: true  
     }  
 };  
 
-// 设置力导向图数据  
+// Force-directed graph data setup  
 const graphData = {  
     nodes: [  
-        { id: "Q10", type: "question", name: "第10题", accuracy: 0.078 },  
-        { id: "K1", type: "knowledge", name: "几何性质", accuracy: 0.12 },  
-        { id: "K2", type: "knowledge", name: "角的关系", accuracy: 0.08 },  
-        { id: "K3", type: "knowledge", name: "相似三角形", accuracy: 0.15, related: true },  
-        { id: "K4", type: "knowledge", name: "线角关系", accuracy: 0.07 },  
-        { id: "K5", type: "knowledge", name: "几何图形定理", accuracy: 0.21, related: true },  
-        { id: "K6", type: "knowledge", name: "三角形全等", accuracy: 0.35, related: true }  
+        { id: "Q10", type: "question", name: "Question 10", accuracy: 0.078 },  
+        { id: "K1", type: "knowledge", name: "Geometric Properties", accuracy: 0.12 },  
+        { id: "K2", type: "knowledge", name: "Angle Relationships", accuracy: 0.08 },  
+        { id: "K3", type: "knowledge", name: "Similar Triangles", accuracy: 0.15, related: true },  
+        { id: "K4", type: "knowledge", name: "Line-Angle Relationships", accuracy: 0.07 },  
+        { id: "K5", type: "knowledge", name: "Geometric Theorems", accuracy: 0.21, related: true },  
+        { id: "K6", type: "knowledge", name: "Triangle Congruence", accuracy: 0.35, related: true }  
     ],  
     links: [  
         { source: "Q10", target: "K1" },  
@@ -184,24 +230,24 @@ const graphData = {
     ]  
 };  
 
-// 获取节点颜色函数  
+// Function to get node colors  
 function getNodeColor(d) {  
     if (d.type === "question") {  
-        return "#fca5a5"; // 题目节点颜色  
+        return "#fca5a5"; // Color for question nodes  
     }  
     
     if (d.related) {  
-        return "#9ca3af"; // 相关知识点为灰色  
+        return "#9ca3af"; // Gray for related knowledge points  
     }  
     
     const acc = d.accuracy;  
-    if (acc < 0.4) return "#ef4444"; // 红色，低于40%  
-    if (acc < 0.6) return "#f97316"; // 橙色，40%-60%  
-    if (acc < 0.8) return "#eab308"; // 黄色，60%-80%  
-    return "#22c55e"; // 绿色，大于80%  
+    if (acc < 0.4) return "#ef4444"; // Red for below 40%  
+    if (acc < 0.6) return "#f97316"; // Orange for 40%-60%  
+    if (acc < 0.8) return "#eab308"; // Yellow for 60%-80%  
+    return "#22c55e"; // Green for above 80%  
 }  
 
-// 绘制力导向图  
+// Draw force-directed graph  
 const width = document.getElementById("left-panel").clientWidth;  
 const height = document.getElementById("left-panel").clientHeight;  
 
@@ -209,12 +255,12 @@ const svgGraph = d3.select("#graph-svg")
     .attr("width", width)  
     .attr("height", height);  
 
-// 增强力导向图配置，防止重叠  
+// Enhanced force-directed graph configuration  
 const simulation = d3.forceSimulation(graphData.nodes)  
     .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))  
     .force("charge", d3.forceManyBody().strength(-600))  
     .force("center", d3.forceCenter(width / 2, height / 2))  
-    .force("collision", d3.forceCollide().radius(60)) // 增加碰撞检测  
+    .force("collision", d3.forceCollide().radius(60)) // Enhanced collision detection  
     .on("tick", ticked);  
 
 const link = svgGraph.selectAll("line.link")  
@@ -228,7 +274,7 @@ const node = svgGraph.selectAll("g.node")
     .enter()  
     .append("g")  
     .attr("class", "node")  
-    .call(d3.drag() // 添加拖拽功能  
+    .call(d3.drag() // Add drag functionality  
         .on("start", dragstarted)  
         .on("drag", dragged)  
         .on("end", dragended));  
@@ -241,19 +287,19 @@ node.append("circle")
     .on("mouseover", (event, d) => {  
         let htmlStr = "";  
         if (d.type === "question") {  
-            htmlStr = `题号：<strong>${d.name}</strong>`;  
+            htmlStr = `Question：<strong>${d.name}</strong>`;  
         } else {  
-            htmlStr = `知识点：<strong>${d.name}</strong>`;  
+            htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
             if (qSet) {  
                 htmlStr += `  
-                    <br/><strong>基础题：</strong>${qSet.basic}  
-                    <br/><strong>中等题：</strong>${qSet.medium}  
-                    <br/><strong>较难题：</strong>${qSet.advanced}  
-                    <br/><strong>正确率：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
+                    <br/><strong>Basic：</strong>${qSet.basic}  
+                    <br/><strong>Medium：</strong>${qSet.medium}  
+                    <br/><strong>Advanced：</strong>${qSet.advanced}  
+                    <br/><strong>Accuracy：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
                 `;  
             } else {  
-                htmlStr += "<br/>暂无示例题";  
+                htmlStr += "<br/>No example questions available";  
             }  
         }  
         tooltipGraph  
@@ -272,7 +318,7 @@ node.append("text")
     .attr("fill", "#333")  
     .attr("font-weight", d => (d.type === "question" ? "bold" : "normal"));  
 
-// 拖拽功能实现  
+// Drag functionality implementation  
 function dragstarted(event, d) {  
     if (!event.active) simulation.alphaTarget(0.3).restart();  
     d.fx = d.x;  
@@ -291,7 +337,7 @@ function dragended(event, d) {
 }  
 
 function ticked() {  
-    // 确保节点不会超出可视区域  
+    // Ensure nodes do not go beyond the visible area  
     graphData.nodes.forEach(function(d) {  
         d.x = Math.max(40, Math.min(width - 40, d.x));  
         d.y = Math.max(40, Math.min(height - 40, d.y));  
@@ -306,13 +352,13 @@ function ticked() {
     node.attr("transform", d => `translate(${d.x}, ${d.y})`);  
 }  
 
-// 历史正确率折线图  
+// Historical Accuracy Trend Line Chart  
 const trendData = [  
-    { time: "测验1", accuracy: 0.05 },  
-    { time: "测验2", accuracy: 0.07 },  
-    { time: "测验3", accuracy: 0.072 },  
-    { time: "测验4", accuracy: 0.075 },  
-    { time: "测验5", accuracy: 0.0789 }  
+    { time: "Test 1", accuracy: 0.05 },  
+    { time: "Test 2", accuracy: 0.07 },  
+    { time: "Test 3", accuracy: 0.072 },  
+    { time: "Test 4", accuracy: 0.075 },  
+    { time: "Test 5", accuracy: 0.0789 }  
 ];  
 
 const chartWidth = document.getElementById("line-chart").clientWidth;  
@@ -375,7 +421,7 @@ svgLine.selectAll(".dot")
     .attr("fill", "#ff5722")  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>正确率：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Accuracy：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
