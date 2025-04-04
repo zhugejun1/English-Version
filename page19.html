@@ -12,13 +12,13 @@
     <script>  
         MathJax = {  
             tex: {  
-                inlineMath: [ ["\\(", "\\)"] ],  
-                displayMath: [ ["$$", "$$"] ],  
+                inlineMath: [["\\(", "\\)"]],  
+                displayMath: [["$$", "$$"]],  
                 processEscapes: true  
             },  
             svg: {  
-                    fontCache: "global"  
-                }  
+                fontCache: "global"  
+            }  
         };  
     </script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.min.js"></script>  
@@ -29,13 +29,13 @@
         .node circle:hover { fill: #555; }  
         .node text { pointer-events: none; font-size: 12px; fill: #333; }  
         line.link { stroke: #ccc; stroke-width: 1.5px; }  
-        .tooltip { position: absolute; min-width: 150px; padding: 8px; font-size: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #ddd; border-radius: 4px; pointer-events: none; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); opacity: 0; transition: opacity 0.2s; z-index: 999; }  
+        .tooltip { position: absolute; min-width: 300px; padding: 8px; font-size: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #ddd; border-radius: 4px; pointer-events: none; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); opacity: 0; transition: opacity 0.2s; z-index: 999; }  
         .line { fill: none; stroke-width: 2px; }  
         .line-chart-axis path, .line-chart-axis line { fill: none; stroke: #ccc; }  
         .dot { fill: #ff5722; stroke: #fff; stroke-width: 1px; cursor: pointer; }  
         .dot:hover { opacity: 0.8; }  
-        .color-legend { position: absolute; bottom: 20px; left: 20px; background: rgba(255, 255, 255, 0.95); padding: 10px; border-radius: 4px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }  
-        .legend-item { display: flex; align-items: center; margin-bottom: 5px; }  
+        .color-legend { position: absolute; bottom: 20px; left: 20px; background: rgba(255, 255, 255, 0.9); padding: 10px; border-radius: 4px; border: 1px solid #ddd; }  
+        .legend-item { display: flex; align-items: center; margin-bottom: 4px; }  
         .legend-color { width: 16px; height: 16px; margin-right: 8px; border-radius: 50%; }  
     </style>  
 </head>  
@@ -92,6 +92,22 @@
                 As shown in the diagram, points \( G, D, F \) are collinear, and \( \angle 1 + \angle 2 = 180^\circ \), \( \angle B = \angle 3 \).  
                 Prove: \( \angle AED = \angle 4 \).  
             </p>  
+
+            <div class="mb-4">  
+                <p>To Prove:</p>  
+                <p>\( \angle L2 = \angle L BDF \) (________),</p>  
+                <p>\( EF \parallel AB \) (________),</p>  
+                <p>\( \angle L3 = \angle ADE \) (________),</p>  
+                <p>\( \angle L3 = \angle B = \angle ADE \) (________),</p>  
+                <p>\( DE \parallel BC \) (________),</p>  
+                <p>\( \angle AED = \angle ACB \) (________),</p>  
+                <p>\( \angle ACB = \angle 4 \) (________),</p>  
+                <p>\( \angle B = \angle 4 \) (________),</p>  
+                <p>\( \angle AED = \angle 4 \) (________).</p>  
+            </div>  
+
+            <p>Current Mastery Rate: <span class="text-green-600 font-medium">63.2%</span></p>  
+            <p>Historical Accuracy Rate: <span class="text-yellow-600 font-medium">68%</span></p>  
         </div>  
 
         <!-- Historical Accuracy Rate Line Chart -->  
@@ -107,77 +123,79 @@
 // Knowledge Points and Example Questions Data  
 const knowledgeQuestions = {  
     "Properties of Parallel Lines": {  
-        basic: "Definition and basic properties of parallel lines",  
-        medium: "Interior angle theorem of parallel lines",  
-        advanced: "Complex calculations between two parallel lines",  
-        accuracy: 0.42  
+        basic: "Basic properties of parallel lines and angles formed by transversals",  
+        medium: "Application of parallel line theorems",  
+        advanced: "Complex problems involving parallel lines in polygons",  
+        accuracy: 0.8,  
+        subNodes: [  
+            { id: "S1", name: "Corresponding Angles", accuracy: 0.8,  
+                basic: "Basic concept of corresponding angles",  
+                medium: "Application of corresponding angles",  
+                advanced: "Complex applications of corresponding angles in geometry" },  
+            { id: "S2", name: "Alternate Interior Angles", accuracy: 0.75,  
+                basic: "Basic concept of alternate interior angles",  
+                medium: "Application of alternate interior angles",  
+                advanced: "Complex applications of alternate interior angles" }  
+        ]  
     },  
-    "Foundations of Geometric Proofs": {  
-        basic: "Geometric axioms and definitions",  
-        medium: "Simple geometric deductions",  
-        advanced: "Multi-step geometric proofs",  
-        accuracy: 0.38  
+    "Angle Sum Properties": {  
+        basic: "Basic properties of angle sums",  
+        medium: "Calculation problems involving angle sums",  
+        advanced: "Application in geometric proofs",  
+        accuracy: 0.75,  
+        subNodes: [  
+            { id: "S3", name: "Sum of Interior Angles of Polygons", accuracy: 0.82,  
+                basic: "Calculation of the sum of interior angles",  
+                medium: "Application in quadrilaterals",  
+                advanced: "Complex applications in various polygons" }  
+        ]  
     },  
-    "Properties of Similar Triangles": {  
-        basic: "Methods for determining similar triangles",  
-        medium: "Proportional calculations",  
-        advanced: "Comprehensive problems involving similar triangles",  
-        accuracy: 0.72  
-    },  
-    "Inner and Outer Angle Properties": {  
-        basic: "Relationship between inner and outer angles of polygons",  
-        medium: "Advanced angle analysis",  
-        advanced: "Comprehensive angle derivations",  
-        accuracy: 0.85  
-    },  
-    "Diagonal Properties of Parallelograms": {  
-        basic: "Properties of parallelogram diagonals",  
-        medium: "Solving moderately complex problems",  
-        advanced: "Proving and calculating combined properties",  
-        accuracy: 0.55  
-    },  
-    "Properties of Circle Tangents": {  
-        basic: "Properties of tangents and points of tangency",  
-        medium: "Geometric analysis of tangents and angles",  
-        advanced: "Advanced comprehensive problems involving tangents",  
-        accuracy: 0.90  
-    },  
-    "Circle Area Calculation": {  
-        basic: "Basic formula for the area of a circle",  
-        medium: "Calculating divided areas",  
-        advanced: "Application of circle areas in compound geometry",  
-        accuracy: 0.65  
-    },  
-    "Area Calculation of Trapezoids": {  
-        basic: "Derivation of the trapezoid area formula",  
-        medium: "Applications combined with parallel properties",  
-        advanced: "Advanced problems related to trapezoid areas",  
-        accuracy: 0.50  
+    "Geometric Proof Methods": {  
+        basic: "Basic techniques in geometric proofs",  
+        medium: "Application of geometric methods in reasoning",  
+        advanced: "Complete proofs of complex geometric problems",  
+        accuracy: 0.78,  
+        subNodes: [  
+            { id: "S4", name: "Proof of Triangle Congruence", accuracy: 0.85,  
+                basic: "Basic theorems of triangle congruence",  
+                medium: "Medium difficulty proofs",  
+                advanced: "Complex proofs of triangle congruence" }  
+        ]  
     }  
 };  
 
 // Force Directed Graph Data  
 const graphData = {  
     nodes: [  
-        { id: "Q19", type: "question", name: "Question 19", accuracy: 0.35 },  
-        { id: "K1", type: "knowledge", name: "Properties of Parallel Lines", accuracy: 0.42 },  
-        { id: "K2", type: "knowledge", name: "Foundations of Geometric Proofs", accuracy: 0.38 },  
-        { id: "K3", type: "knowledge", name: "Properties of Similar Triangles", accuracy: 0.72 },  
-        { id: "K4", type: "knowledge", name: "Inner and Outer Angle Properties", accuracy: 0.85 },  
-        { id: "K5", type: "knowledge", name: "Diagonal Properties of Parallelograms", accuracy: 0.55 },  
-        { id: "K6", type: "knowledge", name: "Properties of Circle Tangents", accuracy: 0.90 },  
-        { id: "K7", type: "knowledge", name: "Circle Area Calculation", accuracy: 0.65 },  
-        { id: "K8", type: "knowledge", name: "Area Calculation of Trapezoids", accuracy: 0.50 }  
+        { id: "Q19", type: "question", name: "Question 19", accuracy: 0.68 },  
+        { id: "K1", type: "knowledge", name: "Properties of Parallel Lines", accuracy: 0.8 },  
+        { id: "K2", type: "knowledge", name: "Angle Sum Properties", accuracy: 0.75 },  
+        { id: "K3", type: "knowledge", name: "Geometric Proof Methods", accuracy: 0.78 },  
+        { id: "S1", type: "sub-knowledge", name: "Corresponding Angles", accuracy: 0.8,  
+            basic: "Basic concept of corresponding angles",  
+            medium: "Application of corresponding angles",  
+            advanced: "Complex applications of corresponding angles in geometry" },  
+        { id: "S2", type: "sub-knowledge", name: "Alternate Interior Angles", accuracy: 0.75,  
+            basic: "Basic concept of alternate interior angles",  
+            medium: "Application of alternate interior angles",  
+            advanced: "Complex applications of alternate interior angles" },  
+        { id: "S3", type: "sub-knowledge", name: "Sum of Interior Angles of Polygons", accuracy: 0.82,  
+            basic: "Calculation of the sum of interior angles",  
+            medium: "Application in quadrilaterals",  
+            advanced: "Complex applications in various polygons" },  
+        { id: "S4", type: "sub-knowledge", name: "Proof of Triangle Congruence", accuracy: 0.85,  
+            basic: "Basic theorems of triangle congruence",  
+            medium: "Medium difficulty proofs",  
+            advanced: "Complex proofs of triangle congruence" }  
     ],  
     links: [  
         { source: "Q19", target: "K1" },  
         { source: "Q19", target: "K2" },  
         { source: "Q19", target: "K3" },  
-        { source: "Q19", target: "K4" },  
-        { source: "Q19", target: "K5" },  
-        { source: "K1", target: "K6" },  
-        { source: "K2", target: "K7" },  
-        { source: "K3", target: "K8" }  
+        { source: "K1", target: "S1" },  
+        { source: "K1", target: "S2" },  
+        { source: "K2", target: "S3" },  
+        { source: "K3", target: "S4" }  
     ]  
 };  
 
@@ -186,12 +204,16 @@ function getNodeColor(d) {
     if (d.type === "question") {  
         return "#fca5a5"; // Question node color  
     }  
-    
+
+    if (d.type === "sub-knowledge") {  
+        return "#9ca3af"; // Sub-knowledge nodes are gray  
+    }  
+
     const acc = d.accuracy;  
-    if (acc < 0.4) return "#ef4444"; // Below 40%  
-    if (acc < 0.6) return "#f97316"; // 40%-60%  
-    if (acc < 0.8) return "#eab308"; // 60%-80%  
-    return "#22c55e"; // Above 80%  
+    if (acc < 0.4) return "#ef4444"; // Below 40% - Red  
+    if (acc < 0.6) return "#f97316"; // 40%-60% - Orange  
+    if (acc < 0.8) return "#eab308"; // 60%-80% - Yellow  
+    return "#22c55e"; // Above 80% - Green  
 }  
 
 // Draw Force Directed Graph  
@@ -205,7 +227,7 @@ const svgGraph = d3.select("#graph-svg")
 // Enhanced Force Directed Graph Configuration  
 const simulation = d3.forceSimulation(graphData.nodes)  
     .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))  
-    .force("charge", d3.forceManyBody().strength(-600))  
+    .force("charge", d3.forceManyBody().strength(-500))  
     .force("center", d3.forceCenter(width / 2, height / 2))  
     .force("collision", d3.forceCollide().radius(60)) // Prevent node overlap  
     .on("tick", ticked);  
@@ -221,7 +243,7 @@ const node = svgGraph.selectAll("g.node")
     .enter()  
     .append("g")  
     .attr("class", "node")  
-    .call(d3.drag() // Add drag functionality  
+    .call(d3.drag()  
         .on("start", dragstarted)  
         .on("drag", dragged)  
         .on("end", dragended));  
@@ -236,9 +258,16 @@ node.append("circle")
         if (d.type === "question") {  
             htmlStr = `Question Number：<strong>${d.name}</strong>`;  
         } else {  
-            htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
-            if (qSet) {  
+            const subNode = graphData.nodes.find(n => n.id === d.id);  
+            if (subNode && subNode.basic) {  
+                htmlStr += `  
+                    <br/><strong>Basic：</strong>${subNode.basic}  
+                    <br/><strong>Medium：</strong>${subNode.medium}  
+                    <br/><strong>Advanced：</strong>${subNode.advanced}  
+                    <br/><strong>Accuracy：</strong>${(subNode.accuracy * 100).toFixed(1)}%  
+                `;  
+            } else if (qSet) {  
                 htmlStr += `  
                     <br/><strong>Basic：</strong>${qSet.basic}  
                     <br/><strong>Medium：</strong>${qSet.medium}  
@@ -286,10 +315,10 @@ function dragended(event, d) {
 function ticked() {  
     // Keep nodes within visible area  
     graphData.nodes.forEach(function(d) {  
-        d.x = Math.max(40, Math.min(width - 40, d.x));  
-        d.y = Math.max(40, Math.min(height - 40, d.y));  
+        d.x = Math.max(30, Math.min(width - 30, d.x));  
+        d.y = Math.max(30, Math.min(height - 30, d.y));  
     });  
-    
+
     link  
         .attr("x1", d => d.source.x)  
         .attr("y1", d => d.source.y)  
@@ -301,19 +330,18 @@ function ticked() {
 
 // Historical Accuracy Rate Line Chart  
 const trendData = [  
-    { time: "Test 1", accuracy: 0.39 },  
-    { time: "Test 2", accuracy: 0.36 },  
-    { time: "Test 3", accuracy: 0.42 },  
-    { time: "Test 4", accuracy: 0.38 },  
-    { time: "Test 5", accuracy: 0.44 }  
+    { time: "Test 1", accuracy: 0.6 },  
+    { time: "Test 2", accuracy: 0.7 },  
+    { time: "Test 3", accuracy: 0.75 },  
+    { time: "Test 4", accuracy: 0.8 }  
 ];  
 
-const chartWidth = document.getElementById("line-chart").clientWidth;  
-const chartHeight = document.getElementById("line-chart").clientHeight;  
+const lineChartWidth = document.getElementById("line-chart").clientWidth;  
+const lineChartHeight = document.getElementById("line-chart").clientHeight;  
 
 const margin = { top: 20, right: 20, bottom: 30, left: 40 };  
-const innerWidth = chartWidth - margin.left - margin.right;  
-const innerHeight = chartHeight - margin.top - margin.bottom;  
+const innerWidth = lineChartWidth - margin.left - margin.right;  
+const innerHeight = lineChartHeight - margin.top - margin.bottom;  
 
 const xScale = d3.scalePoint()  
     .domain(trendData.map(d => d.time))  
@@ -325,8 +353,8 @@ const yScale = d3.scaleLinear()
     .range([innerHeight, 0]);  
 
 const svgLine = d3.select("#line-chart")  
-    .attr("width", chartWidth)  
-    .attr("height", chartHeight)  
+    .attr("width", lineChartWidth)  
+    .attr("height", lineChartHeight)  
     .append("g")  
     .attr("transform", `translate(${margin.left},${margin.top})`);  
 
@@ -335,7 +363,7 @@ const yAxis = d3.axisLeft(yScale).tickFormat(d3.format(".0%"));
 
 svgLine.append("g")  
     .attr("class", "line-chart-axis")  
-    .attr("transform", `translate(0, ${innerHeight})`)  
+    .attr("transform", `translate(0,${innerHeight})`)  
     .call(xAxis);  
 
 svgLine.append("g")  
@@ -350,10 +378,8 @@ const lineGenerator = d3.line()
 svgLine.append("path")  
     .datum(trendData)  
     .attr("class", "line")  
-    .attr("fill", "none")  
-    .attr("stroke", "#f97316")  
-    .attr("stroke-width", 2)  
-    .attr("d", lineGenerator);  
+    .attr("d", lineGenerator)  
+    .attr("stroke", "#f97316");  
 
 const tooltipLine = d3.select("#line-tooltip");  
 
@@ -365,7 +391,6 @@ svgLine.selectAll(".dot")
     .attr("r", 4)  
     .attr("cx", d => xScale(d.time))  
     .attr("cy", d => yScale(d.accuracy))  
-    .attr("fill", "#ff5722")  
     .on("mouseover", (event, d) => {  
         tooltipLine  
             .html(`${d.time}<br/>Accuracy：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
@@ -377,5 +402,8 @@ svgLine.selectAll(".dot")
         tooltipLine.style("opacity", 0);  
     });  
 </script>  
+
+<!-- Tooltip layer -->  
+<div id="line-tooltip" class="tooltip"></div>  
 </body>  
 </html>  
