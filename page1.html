@@ -1,14 +1,14 @@
 <!DOCTYPE html>  
-<html lang="zh">  
+<html lang="en">  
 <head>  
     <meta charset="UTF-8" />  
-    <title>第1题 - 实数分类问题</title>  
+    <title>Question 1 - Real Number Classification Problem</title>  
     <!-- Tailwind CSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
     <!-- D3.js v6 -->  
     <script src="https://d3js.org/d3.v6.min.js"></script>  
 
-    <!-- MathJax 引入 -->  
+    <!-- MathJax Configuration -->  
     <script>  
         MathJax = {  
             tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["$$", "$$"]] },  
@@ -32,55 +32,55 @@
 </head>  
 <body class="h-screen w-screen overflow-hidden bg-gray-100">  
 
-<!-- 顶部：返回按钮 -->  
+<!-- Top: Back Button -->  
 <div class="p-4 bg-white shadow">  
     <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
-        返回题目列表  
+        Back to Question List  
     </button>  
 </div>  
 
-<!-- 主体：左侧力导向图 + 右侧题目信息 -->  
+<!-- Main: Left Force-Directed Graph + Right Question Info -->  
 <div class="flex h-[calc(100vh-64px)]">  
 
-    <!-- 左侧：力导向图 -->  
+    <!-- Left: Force-Directed Graph -->  
     <div id="left-panel" class="w-1/2 h-full bg-white relative">  
         <svg id="graph-svg" class="w-full h-full"></svg>  
         <div id="graph-tooltip" class="tooltip"></div>  
     </div>  
 
-    <!-- 右侧：题目信息和历史正确率折线图 -->  
+    <!-- Right: Question Info and Historical Accuracy Line Chart -->  
     <div id="right-panel" class="w-1/2 h-full flex flex-col p-4 space-y-4">  
 
-        <!-- 题目信息 -->  
+        <!-- Question Info -->  
         <div class="bg-white p-4 rounded shadow">  
-            <h1 class="text-xl font-bold mb-2">题号：第1题 - 实数分类问题</h1>  
+            <h1 class="text-xl font-bold mb-2">Question No: Question 1 - Real Number Classification Problem</h1>  
             <p class="mb-2">  
-                在实数：\( 3.14159 \)、\( \sqrt[3]{27} \)、\( 1.010010001 \)、\( \frac{\pi}{5} \)、\( \sqrt{8} \)、\( \frac{11}{3} \) 中，  
-                是无理数的有（ ）  
+                Among the real numbers: \( 3.14159 \)、\( \sqrt[3]{27} \)、\( 1.010010001 \)、\( \frac{\pi}{5} \)、\( \sqrt{8} \)、\( \frac{11}{3} \),  
+                which are irrational numbers ( )  
             </p>  
             <div class="mb-4">  
                 <input type="checkbox" id="option1" />  
-                <label for="option1">A. 1个</label>  
+                <label for="option1">A. 1</label>  
             </div>  
             <div class="mb-4">  
                 <input type="checkbox" id="option2" />  
-                <label for="option2">B. 2个</label>  
+                <label for="option2">B. 2</label>  
             </div>  
             <div class="mb-4">  
                 <input type="checkbox" id="option3" />  
-                <label for="option3">C. 3个</label>  
+                <label for="option3">C. 3</label>  
             </div>  
             <div class="mb-4">  
                 <input type="checkbox" id="option4" />  
-                <label for="option4">D. 4个</label>  
+                <label for="option4">D. 4</label>  
             </div>  
-            <p>当前掌握率：<span class="text-green-600 font-medium">83.78%</span></p>  
-            <p>历史正确率：<span class="text-yellow-600 font-medium">35%</span></p>  
+            <p>Current Mastery Rate: <span class="text-green-600 font-medium">83.78%</span></p>  
+            <p>Historical Accuracy Rate: <span class="text-yellow-600 font-medium">35%</span></p>  
         </div>  
 
-        <!-- 历史正确率折线图 -->  
+        <!-- Historical Accuracy Line Chart -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
-            <h2 class="text-lg font-bold mb-2">历史正确率趋势</h2>  
+            <h2 class="text-lg font-bold mb-2">Historical Accuracy Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
             <div id="line-tooltip" class="tooltip"></div>  
         </div>  
@@ -88,15 +88,15 @@
 </div>  
 
 <script>  
-    // 力导向图数据  
+    // Force-Directed Graph Data  
     const graphData = {  
         nodes: [  
-            { id: "Q1", type: "question", name: "第1题" },  
-            { id: "K1", type: "knowledge", name: "无理数的定义" },  
-            { id: "K2", type: "knowledge", name: "有理数与无理数分类" },  
-            { id: "K3", type: "knowledge", name: "数轴上的实数表示" },  
-            { id: "E1", type: "example", name: "简单分类题" },  
-            { id: "E2", type: "example", name: "复合数值分类" }  
+            { id: "Q1", type: "question", name: "Question 1" },  
+            { id: "K1", type: "knowledge", name: "Definition of Irrational Numbers" },  
+            { id: "K2", type: "knowledge", name: "Classification of Rational and Irrational Numbers" },  
+            { id: "K3", type: "knowledge", name: "Representation of Real Numbers on the Number Line" },  
+            { id: "E1", type: "example", name: "Simple Classification Problem" },  
+            { id: "E2", type: "example", name: "Complex Value Classification" }  
         ],  
         links: [  
             { source: "Q1", target: "K1" },  
@@ -137,14 +137,14 @@
     node.append("circle")  
         .attr("r", d => d.type === "question" ? 18 : (d.type === "knowledge" ? 14 : 10))  
         .attr("fill", d => {  
-            if (d.type === "question") return "#fca5a5"; // 浅红  
-            if (d.type === "knowledge") return "#93c5fd"; // 浅蓝  
-            return "#a5d8a5"; // 浅绿  
+            if (d.type === "question") return "#fca5a5"; // Light Red  
+            if (d.type === "knowledge") return "#93c5fd"; // Light Blue  
+            return "#a5d8a5"; // Light Green  
         })  
         .on("mouseover", (event, d) => {  
             tooltipGraph  
                 .style("opacity", 1)  
-                .html(`<strong>${d.type === "question" ? "题目" : d.type === "knowledge" ? "知识点" : "例题"}：</strong> ${d.name}`)  
+                .html(`<strong>${d.type === "question" ? "Question" : d.type === "knowledge" ? "Knowledge Point" : "Example"}：</strong> ${d.name}`)  
                 .style("left", `${event.pageX + 10}px`)  
                 .style("top", `${event.pageY - 10}px`);  
         })  
@@ -167,13 +167,13 @@
         node.attr("transform", d => `translate(${d.x}, ${d.y})`);  
     }  
 
-    // 历史正确率折线图数据  
+    // Historical Accuracy Line Chart Data  
     const trendData = [  
-        { time: "测验1", accuracy: 0.70 },  
-        { time: "测验2", accuracy: 0.75 },  
-        { time: "测验3", accuracy: 0.78 },  
-        { time: "测验4", accuracy: 0.80 },  
-        { time: "当前", accuracy: 0.8378 }  
+        { time: "Test 1", accuracy: 0.70 },  
+        { time: "Test 2", accuracy: 0.75 },  
+        { time: "Test 3", accuracy: 0.78 },  
+        { time: "Test 4", accuracy: 0.80 },  
+        { time: "Current", accuracy: 0.8378 }  
     ];  
 
     const lineChartWidth = document.getElementById("line-chart").clientWidth;  
@@ -189,7 +189,7 @@
         .padding(0.5);  
 
     const yScale = d3.scaleLinear()  
-        .domain([0.6, 1]) // 根据数据设置 Y 轴范围  
+        .domain([0.6, 1]) // Set Y-axis range based on data  
         .range([innerHeight, 0]);  
 
     const svgLine = d3.select("#line-chart")  
@@ -230,7 +230,7 @@
         .attr("fill", "#f97316")  
         .on("mouseover", (event, d) => {  
             d3.select("#line-tooltip")  
-                .html(`${d.time}<br/>正确率：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+                .html(`${d.time}<br/>Accuracy Rate: <strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
                 .style("opacity", 1)  
                 .style("left", (event.pageX + 10) + "px")  
                 .style("top", (event.pageY - 10) + "px");  
