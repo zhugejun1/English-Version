@@ -1,13 +1,13 @@
 <!DOCTYPE html>  
-<html lang="zh">  
+<html lang="en">  
 <head>  
     <meta charset="UTF-8" />  
-    <title>第18题 - 数学题目</title>  
+    <title>Question 18 - Math Problem</title>  
     <!-- Tailwind CSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
     <!-- D3.js v6 -->  
     <script src="https://d3js.org/d3.v6.min.js"></script>  
-    <!-- MathJax 引入 -->  
+    <!-- MathJax -->  
     <script>  
         MathJax = {  
             tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["$$", "$$"]] },  
@@ -31,46 +31,46 @@
 </head>  
 <body class="h-screen w-screen overflow-hidden bg-gray-100">  
 
-<!-- 顶部：返回按钮 -->  
+<!-- Top: Back Button -->  
 <div class="p-4 bg-white shadow">  
     <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
-        返回题目列表  
+        Return to Question List  
     </button>  
 </div>  
 
-<!-- 主体：左侧力导向图 + 右侧题目信息 -->  
+<!-- Main Content: Force Directed Graph (Left) + Question Info (Right) -->  
 <div class="flex h-[calc(100vh-64px)]">  
 
-    <!-- 左侧：力导向图 -->  
+    <!-- Left: Force Directed Graph -->  
     <div id="left-panel" class="w-1/2 h-full bg-white relative">  
         <svg id="graph-svg" class="w-full h-full"></svg>  
         <div id="graph-tooltip" class="tooltip"></div>  
     </div>  
 
-    <!-- 右侧：题目信息 -->  
+    <!-- Right: Question Information -->  
     <div id="right-panel" class="w-1/2 h-full flex flex-col p-4 space-y-4">  
 
-        <!-- 第18（1）题干描述区域 -->  
+        <!-- Question 18(1) Description -->  
         <div class="bg-white p-4 rounded shadow mb-4">  
-            <h1 class="text-xl font-bold mb-2">题号：第18（1）题</h1>  
-            <p class="mb-4">求下列式中 \( x \) 的值：</p>  
+            <h1 class="text-xl font-bold mb-2">Question Number: Question 18(1)</h1>  
+            <p class="mb-4">Find the value of \( x \) in the following equation:</p>  
             <p class="mb-4">\( x^3 - 8 = 0 \)</p>  
-            <p>当前掌握率：<span class="text-green-600 font-medium">35.14%</span></p>  
-            <p>历史正确率：<span class="text-yellow-600 font-medium">60%</span></p>  
+            <p>Current Mastery Rate: <span class="text-green-600 font-medium">35.14%</span></p>  
+            <p>Historical Accuracy Rate: <span class="text-yellow-600 font-medium">60%</span></p>  
         </div>  
 
-        <!-- 第18（2）题干描述区域 -->  
+        <!-- Question 18(2) Description -->  
         <div class="bg-white p-4 rounded shadow mb-4">  
-            <h1 class="text-xl font-bold mb-2">题号：第18（2）题</h1>  
-            <p class="mb-4">求下列式中 \( x \) 的值：</p>  
+            <h1 class="text-xl font-bold mb-2">Question Number: Question 18(2)</h1>  
+            <p class="mb-4">Find the value of \( x \) in the following equation:</p>  
             <p class="mb-4">\( x^3 - 3 = \frac{3}{8} \)</p>  
-            <p>当前掌握率：<span class="text-green-600 font-medium">35.14%</span></p>  
-            <p>历史正确率：<span class="text-yellow-600 font-medium">60%</span></p>  
+            <p>Current Mastery Rate: <span class="text-green-600 font-medium">35.14%</span></p>  
+            <p>Historical Accuracy Rate: <span class="text-yellow-600 font-medium">60%</span></p>  
         </div>  
 
-        <!-- 历史正确率折线图 -->  
+        <!-- Historical Accuracy Rate Line Chart -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
-            <h2 class="text-lg font-bold mb-2">历史正确率趋势</h2>  
+            <h2 class="text-lg font-bold mb-2">Historical Accuracy Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
             <div id="line-tooltip" class="tooltip"></div>  
         </div>  
@@ -78,89 +78,89 @@
 </div>  
 
 <script>  
-// ================ 知识点对应示例题 ================  
+// ================ Knowledge Points and Example Questions ================  
 const knowledgeQuestions = {  
-    "立方根": {  
-        basic: "理解立方根的概念与计算",  
-        medium: "掌握立方根与立方方程的关系",  
-        advanced: "应用立方根解决复杂的代数问题",  
+    "Cube Root": {  
+        basic: "Understand the concept and calculation of cube roots",  
+        medium: "Master the relationship between cube roots and cubic equations",  
+        advanced: "Apply cube roots to solve complex algebra problems",  
         accuracy: 0.35 // 35%  
     },  
-    "立方根的性质": {  
-        basic: "了解立方根的基本性质",  
-        medium: "掌握立方根与正负数的关系",  
-        advanced: "使用立方根解决几何问题",  
+    "Properties of Cube Roots": {  
+        basic: "Understand the basic properties of cube roots",  
+        medium: "Master the relationship between cube roots and positive/negative numbers",  
+        advanced: "Use cube roots to solve geometry problems",  
         accuracy: 0.40 // 40%  
     },  
-    "立方根的应用": {  
-        basic: "理解立方根在实际问题中的应用",  
-        medium: "计算真实世界中的立方根",  
-        advanced: "应用立方根与体积相关的问题",  
+    "Applications of Cube Roots": {  
+        basic: "Understand the application of cube roots in real-world problems",  
+        medium: "Calculate cube roots in practical scenarios",  
+        advanced: "Apply cube roots to volume-related problems",  
         accuracy: 0.55 // 55%  
     },  
-    "一元三次方程": {  
-        basic: "了解一元三次方程的标准形式",  
-        medium: "掌握一元三次方程的解法",  
-        advanced: "在各种条件下应用一元三次方程解题",  
+    "Cubic Equations": {  
+        basic: "Understand the standard form of cubic equations",  
+        medium: "Master methods for solving cubic equations",  
+        advanced: "Apply cubic equations under various conditions",  
         accuracy: 0.60 // 60%  
     },  
-    "一元三次方程的因式分解": {  
-        basic: "理解一元三次方程的因式分解",  
-        medium: "掌握常见一元三次方程的因式分解技巧",  
-        advanced: "使用因式分解求解高阶方程",  
+    "Factoring of Cubic Equations": {  
+        basic: "Understand how to factorize cubic equations",  
+        medium: "Master techniques for factoring common cubic equations",  
+        advanced: "Use factoring to solve higher-order equations",  
         accuracy: 0.70 // 70%  
     },  
-    "因式分解": {  
-        basic: "理解因式分解的基础知识",  
-        medium: "掌握常见三次多项式的因式分解",  
-        advanced: "应用因式分解解决较复杂的代数问题",  
+    "Factoring": {  
+        basic: "Understand the basics of factoring",  
+        medium: "Master factoring of common cubic polynomials",  
+        advanced: "Apply factoring to solve complex algebra problems",  
         accuracy: 0.80 // 80%  
     },  
-    "因式分解的应用": {  
-        basic: "了解因式分解在代数中的重要性",  
-        medium: "通过因式分解简化代数表达式",  
-        advanced: "在解决方程时灵活应用因式分解",  
+    "Applications of Factoring": {  
+        basic: "Understand the importance of factoring in algebra",  
+        medium: "Simplify algebraic expressions through factoring",  
+        advanced: "Use factoring flexibly when solving equations",  
         accuracy: 0.75 // 75%  
     },  
-    "图像法": {  
-        basic: "了解图像法的基本思路",  
-        medium: "掌握如何通过图像解方程",  
-        advanced: "使用图像法解决更高级的代数问题",  
+    "Graphical Method": {  
+        basic: "Understand the basic approach of graphical methods",  
+        medium: "Master how to solve equations graphically",  
+        advanced: "Use graphical methods to solve advanced algebra problems",  
         accuracy: 0.65 // 65%  
     }  
 };  
 
-// ================ 力导向图数据 ================  
+// ================ Force Directed Graph Data ================  
 const graphData = {  
     nodes: [  
-        { id: "Q18_1", type: "question", name: "第18（1）题" },  
-        { id: "Q18_2", type: "question", name: "第18（2）题" },  
-        { id: "K1", type: "knowledge", name: "立方根" },  
-        { id: "K2", type: "knowledge", name: "立方根的性质" },  
-        { id: "K3", type: "knowledge", name: "立方根的应用" },  
-        { id: "K4", type: "knowledge", name: "一元三次方程" },  
-        { id: "K5", type: "knowledge", name: "一元三次方程的因式分解" },  
-        { id: "K6", type: "knowledge", name: "因式分解" },  
-        { id: "K7", type: "knowledge", name: "因式分解的应用" },  
-        { id: "K8", type: "knowledge", name: "图像法" },  
-        { id: "E1", type: "example", name: "例题 1: 求立方根" },  
-        { id: "E2", type: "example", name: "例题 2: 解一元三次方程" }  
+        { id: "Q18_1", type: "question", name: "Question 18(1)" },  
+        { id: "Q18_2", type: "question", name: "Question 18(2)" },  
+        { id: "K1", type: "knowledge", name: "Cube Root" },  
+        { id: "K2", type: "knowledge", name: "Properties of Cube Roots" },  
+        { id: "K3", type: "knowledge", name: "Applications of Cube Roots" },  
+        { id: "K4", type: "knowledge", name: "Cubic Equations" },  
+        { id: "K5", type: "knowledge", name: "Factoring of Cubic Equations" },  
+        { id: "K6", type: "knowledge", name: "Factoring" },  
+        { id: "K7", type: "knowledge", name: "Applications of Factoring" },  
+        { id: "K8", type: "knowledge", name: "Graphical Method" },  
+        { id: "E1", type: "example", name: "Example 1: Finding Cube Roots" },  
+        { id: "E2", type: "example", name: "Example 2: Solving Cubic Equations" }  
     ],  
     links: [  
         { source: "Q18_1", target: "K1" },  
         { source: "K1", target: "K2" },  
-        { source: "K1", target: "K3" }, // 立方根的应用  
+        { source: "K1", target: "K3" }, // Applications of Cube Roots  
         { source: "Q18_2", target: "K4" },  
         { source: "K4", target: "K5" },  
         { source: "K5", target: "K6" },  
-        { source: "K6", target: "K7" }, // 因式分解的应用  
-        { source: "K4", target: "K8" }, // 一元三次方程与图像法  
-        { source: "K2", target: "E1" }, // 立方根示例  
-        { source: "K4", target: "E2" } // 一元三次方程示例  
+        { source: "K6", target: "K7" }, // Applications of Factoring  
+        { source: "K4", target: "K8" }, // Cubic Equations and Graphical Method  
+        { source: "K2", target: "E1" }, // Cube Root Examples  
+        { source: "K4", target: "E2" } // Cubic Equation Examples  
     ]  
 };  
 
-// ================ 力导向图绘制 ================  
+// ================ Force Directed Graph Rendering ================  
 const width = document.getElementById("left-panel").clientWidth;  
 const height = document.getElementById("left-panel").clientHeight;  
 
@@ -191,8 +191,8 @@ const tooltipGraph = d3.select("#graph-tooltip");
 node.append("circle")  
     .attr("r", d => d.type === "question" ? 18 : 14)  
     .attr("fill", d => {  
-        if (d.type === "question") return "#fca5a5"; // 浅红  
-        // 根据知识点的正确率设置颜色              
+        if (d.type === "question") return "#fca5a5"; // Light red  
+        // Set color based on knowledge point accuracy  
         if (d.type === "knowledge") {  
             const accuracy = knowledgeQuestions[d.name].accuracy;  
             if (accuracy < 0.4) return "red";  
@@ -200,24 +200,24 @@ node.append("circle")
             else if (accuracy < 0.8) return "yellow";  
             return "green";  
         }  
-        return "#93c5fd"; // 浅蓝  
+        return "#93c5fd"; // Light blue  
     })  
     .on("mouseover", (event, d) => {  
         let htmlStr = "";  
         if (d.type === "question") {  
-            htmlStr = `题号：<strong>${d.name}</strong>`;  
+            htmlStr = `Question Number：<strong>${d.name}</strong>`;  
         } else {  
-            htmlStr = `知识点：<strong>${d.name}</strong>`;  
+            htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
             if (qSet) {  
                 htmlStr += `  
-                    <br/><strong>基础题：</strong>${qSet.basic}  
-                    <br/><strong>中等题：</strong>${qSet.medium}  
-                    <br/><strong>较难题：</strong>${qSet.advanced}  
-                    <br/><strong>历史正确率：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
+                    <br/><strong>Basic：</strong>${qSet.basic}  
+                    <br/><strong>Medium：</strong>${qSet.medium}  
+                    <br/><strong>Advanced：</strong>${qSet.advanced}  
+                    <br/><strong>Historical Accuracy：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
                 `;  
             } else {  
-                htmlStr += "<br/>暂无示例题";  
+                htmlStr += "<br/>No example questions available";  
             }  
         }  
         tooltipGraph  
@@ -246,21 +246,21 @@ function ticked() {
     node.attr("transform", d => `translate(${d.x}, ${d.y})`);  
 }  
 
-// ================ 历史正确率折线图 ================  
+// ================ Historical Accuracy Rate Line Chart ================  
 const trendData1 = [  
-    { time: "测验1", accuracy: 0.39 },  
-    { time: "测验2", accuracy: 0.36 },  
-    { time: "测验3", accuracy: 0.42 },  
-    { time: "测验4", accuracy: 0.38 },  
-    { time: "测验5", accuracy: 0.44 }  
+    { time: "Test 1", accuracy: 0.39 },  
+    { time: "Test 2", accuracy: 0.36 },  
+    { time: "Test 3", accuracy: 0.42 },  
+    { time: "Test 4", accuracy: 0.38 },  
+    { time: "Test 5", accuracy: 0.44 }  
 ];  
 
 const trendData2 = [  
-    { time: "测验1", accuracy: 0.40 },  
-    { time: "测验2", accuracy: 0.45 },  
-    { time: "测验3", accuracy: 0.38 },  
-    { time: "测验4", accuracy: 0.42 },  
-    { time: "测验5", accuracy: 0.47 }  
+    { time: "Test 1", accuracy: 0.40 },  
+    { time: "Test 2", accuracy: 0.45 },  
+    { time: "Test 3", accuracy: 0.38 },  
+    { time: "Test 4", accuracy: 0.42 },  
+    { time: "Test 5", accuracy: 0.47 }  
 ];  
 
 const lineChartWidth = document.getElementById("line-chart").clientWidth;  
@@ -297,7 +297,7 @@ svgLine.append("g")
     .attr("class", "line-chart-axis")  
     .call(yAxis);  
 
-// 绘制第18（1）题的历史正确率线  
+// Draw historical accuracy line for Question 18(1)  
 const lineGenerator1 = d3.line()  
     .x(d => xScale(d.time))  
     .y(d => yScale(d.accuracy));  
@@ -306,9 +306,9 @@ svgLine.append("path")
     .datum(trendData1)  
     .attr("class", "line")  
     .attr("d", lineGenerator1)  
-    .attr("stroke", "#f97316"); // 第18（1）题的线颜色  
+    .attr("stroke", "#f97316"); // Color for Question 18(1)  
 
-// 绘制第18（2）题的历史正确率线  
+// Draw historical accuracy line for Question 18(2)  
 const lineGenerator2 = d3.line()  
     .x(d => xScale(d.time))  
     .y(d => yScale(d.accuracy));  
@@ -317,7 +317,7 @@ svgLine.append("path")
     .datum(trendData2)  
     .attr("class", "line")  
     .attr("d", lineGenerator2)  
-    .attr("stroke", "#1d4ed8"); // 第18（2）题的线颜色  
+    .attr("stroke", "#1d4ed8"); // Color for Question 18(2)  
 
 const tooltipLine = d3.select("#line-tooltip");  
 
@@ -331,7 +331,7 @@ svgLine.selectAll(".dot1")
     .attr("cy", d => yScale(d.accuracy))  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>第18（1）题正确率：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Question 18(1) Accuracy：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
@@ -350,7 +350,7 @@ svgLine.selectAll(".dot2")
     .attr("cy", d => yScale(d.accuracy))  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>第18（2）题正确率：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Question 18(2) Accuracy：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
@@ -359,10 +359,10 @@ svgLine.selectAll(".dot2")
         tooltipLine.style("opacity", 0);  
     });  
 
-// ================ 颜色注释 ================  
+// ================ Color Legend ================  
 const colorLegend = d3.select("#graph-svg").append("g")  
     .attr("class", "legend")  
-    .attr("transform", `translate(10, ${height - 100})`); // 将注释放在左下角  
+    .attr("transform", `translate(10, ${height - 100})`); // Position legend in bottom-left  
 
 colorLegend.append("rect")  
     .attr("width", 15)  
@@ -371,7 +371,7 @@ colorLegend.append("rect")
 colorLegend.append("text")  
     .attr("x", 20)  
     .attr("y", 12)  
-    .text("正确率 < 40%");  
+    .text("Accuracy < 40%");  
 
 colorLegend.append("rect")  
     .attr("width", 15)  
@@ -381,7 +381,7 @@ colorLegend.append("rect")
 colorLegend.append("text")  
     .attr("x", 20)  
     .attr("y", 32)  
-    .text("40% ≤ 正确率 < 60%");  
+    .text("40% ≤ Accuracy < 60%");  
 
 colorLegend.append("rect")  
     .attr("width", 15)  
@@ -391,7 +391,7 @@ colorLegend.append("rect")
 colorLegend.append("text")  
     .attr("x", 20)  
     .attr("y", 52)  
-    .text("60% ≤ 正确率 < 80%");  
+    .text("60% ≤ Accuracy < 80%");  
 
 colorLegend.append("rect")  
     .attr("width", 15)  
@@ -401,11 +401,11 @@ colorLegend.append("rect")
 colorLegend.append("text")  
     .attr("x", 20)  
     .attr("y", 72)  
-    .text("80% ≤ 正确率 ≤ 100%");  
+    .text("80% ≤ Accuracy ≤ 100%");  
 
 </script>  
 
-<!-- 提示层 -->  
+<!-- Tooltip Layer -->  
 <div id="line-tooltip" class="tooltip"></div>  
 </body>  
 </html>  
