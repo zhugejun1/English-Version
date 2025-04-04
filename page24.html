@@ -1,14 +1,13 @@
 <!DOCTYPE html>  
-<html lang="zh">  
+<html lang="en">  
 <head>  
     <meta charset="UTF-8" />  
-    <title>Question 24 - Geometric Problem</title>  
+    <title>Question 24 - Geometry Problem</title>  
     <!-- Tailwind CSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
     <!-- D3.js v6 -->  
     <script src="https://d3js.org/d3.v6.min.js"></script>  
-
-    <!-- MathJax -->  
+    <!-- MathJax Configuration -->  
     <script>  
         MathJax = {  
             tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["$$", "$$"]] },  
@@ -25,10 +24,9 @@
         }  
         .node circle {  
             cursor: pointer;  
-            transition: fill 0.3s;  
         }  
         .node circle:hover {  
-            fill: #555;  
+            fill: #333;  
         }  
         .node text {  
             pointer-events: none;  
@@ -45,7 +43,7 @@
             padding: 8px;  
             font-size: 12px;  
             background: rgba(255, 255, 255, 0.9);  
-            border: 1px solid #ccc;  
+            border: 1px solid #ddd;  
             border-radius: 4px;  
             pointer-events: none;  
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);  
@@ -77,8 +75,8 @@
             left: 20px;  
             background: rgba(255, 255, 255, 0.95);  
             padding: 10px;  
-            border-radius: 4px;  
             border: 1px solid #ddd;  
+            border-radius: 4px;  
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
         }  
         .legend-item {  
@@ -92,40 +90,38 @@
             margin-right: 8px;  
             border-radius: 50%;  
         }  
-        /* Adjust layout proportions */  
+        /* Layout Ratio */  
         .flex-container {  
-            display: flex;  
             height: 100vh;  
         }  
         #left-panel {  
-            width: 50%;  
+            width: 40%;  
         }  
         #right-panel {  
-            width: 50%;  
+            width: 60%;  
         }  
     </style>  
 </head>  
 <body>  
 
-<!-- Top Navigation -->  
+<!-- Top: Return Button -->  
 <div class="p-4 bg-white shadow">  
-    <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors"  
-        onclick="location.href='index.html'">  
+    <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
         Return to Question List  
     </button>  
 </div>  
 
-<!-- Main Content -->  
-<div class="flex-container flex h-[calc(100vh-64px)]">  
+<!-- Main Content: Force-Directed Graph + Question Information -->  
+<div class="flex-container flex h-[calc(100vh-64px)']">  
 
-    <!-- Left Panel: Force Directed Graph -->  
-    <div id="left-panel" class="bg-white relative">  
+    <!-- Left: Force-Directed Graph -->  
+    <div id="left-panel" class="w-1/2 h-full bg-white relative">  
         <svg id="graph-svg" class="w-full h-full"></svg>  
         <div id="graph-tooltip" class="tooltip"></div>  
 
         <!-- Color Legend -->  
         <div class="color-legend">  
-            <h3 class="text-sm font-bold mb-2">Accuracy Rate Explanation:</h3>  
+            <h3 class="text-sm font-bold mb-2">Accuracy Explanation:</h3>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #ef4444;"></div>  
                 <span class="text-xs">Below 40%</span>  
@@ -139,42 +135,42 @@
                 <span class="text-xs">60%-80%</span>  
             </div>  
             <div class="legend-item">  
-                <div class="legend-color" style="background-color: #22c55e;"></div>  
+                <div class="legend-color" style="background-color: #22c555;"></div>  
                 <span class="text-xs">Above 80%</span>  
             </div>  
         </div>  
     </div>  
 
-    <!-- Right Panel: Question Information and History Trend -->  
-    <div id="right-panel" class="flex flex-col p-4 space-y-4">  
+    <!-- Right: Question Information and History Accuracy Line Chart -->  
+    <div id="right-panel" class="w-1/2 h-full flex flex-col p-4 space-y-4">  
 
-        <!-- Question Information -->  
+        <!-- Question Description -->  
         <div class="bg-white p-4 rounded shadow">  
             <h1 class="text-xl font-bold mb-2">Question 24 (12 points)</h1>  
-            <p class="mb-4">In the geometry activity class, Linlin folded a rectangular strip ABCD along BE, and point A fell on point F.</p>  
+            <p class="mb-4">During a math activity class, Linlin folded a rectangular strip ABCD along BE, and point A fell on point F.</p>  
 
             <div class="mb-4">  
-                <p class="font-medium">(1) As shown in Figure 1, she measured and found that ∠DEF + ∠CBF = ∠A. Prove her conclusion.</p>  
+                <p class="font-medium">(1) As shown in Figure 1, she measured and found: ∠DEF + ∠CBF = ∠A. Please prove her conclusion.</p>  
                 <p class="text-sm text-gray-600">(3 points)</p>  
             </div>  
 
             <div class="mb-4">  
-                <p class="font-medium">(2) As shown in Figure 2, point M is on AD, and point N is on BC. Connect MN, and since MN is parallel to EF, fold the quadrilateral MDCN along the line MN to get MHGN. MH intersects BC at R. Point D's corresponding point is H, and point C's corresponding point is G. She measured and found that ∠CNG = 4∠ABE. Prove her conclusion.</p>  
+                <p class="font-medium">(2) As shown in Figure 2, point M is on AD, and point N is on BC. Connect MN, and MN is parallel to EF. Fold the quadrilateral MDCN along MN to get MHGN. MH intersects BC at R. The corresponding point of D falls on H, and the corresponding point of C falls on G. She measured and found: ∠CNG = 4∠ABE. Please prove her conclusion.</p>  
                 <p class="text-sm text-gray-600">(4 points)</p>  
             </div>  
 
             <div class="mb-4">  
-                <p class="font-medium">(3) Under the conditions of (2), fold the quadrilateral MHGN upwards along RN to form RPQN. Point H's corresponding point falls on point P on AD, and point G falls on point Q. Conjecture the quantitative relationship between ∠ABF, ∠MNQ, and ∠MRN, and prove your conclusion.</p>  
+                <p class="font-medium">(3) Under the conditions of (2), fold the quadrilateral MHGN along RN upwards to get RPQN. MH intersects BC at R, and the corresponding point of H falls on AD at P, and the corresponding point of G falls on Q. Conjecture the quantitative relationship between ∠ABF, ∠MNQ, and ∠MRN, and prove your conclusion.</p>  
                 <p class="text-sm text-gray-600">(5 points)</p>  
             </div>  
 
-            <p>Current mastery rate：<span class="text-green-600 font-medium">0%</span></p>  
-            <p>History correct rate：<span class="text-yellow-600 font-medium">10%</span></p>  
+            <p>Current Mastery Rate：<span class="text-green-600 font-medium">0%</span></p>  
+            <p>Historical Accuracy Rate：<span class="text-yellow-600 font-medium">10%</span></p>  
         </div>  
 
-        <!-- History Correct Rate Line Chart -->  
+        <!-- Historical Accuracy Line Chart -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
-            <h2 class="text-lg font-bold mb-2">History Correct Rate Trend</h2>  
+            <h2 class="text-lg font-bold mb-2">Historical Accuracy Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
             <div id="line-tooltip" class="tooltip"></div>  
         </div>  
@@ -182,91 +178,91 @@
 </div>  
 
 <script>  
-// ================ Knowledge Points and Example Questions Data ================  
+// =================== Knowledge Points and Example Questions Data ===================  
 const knowledgeQuestions = {  
-    "Parallel Lines and Angle Properties": {  
-        basic: "Basic concept of parallel lines and their relationship with angles",  
-        medium: "Application of parallel lines in angle sums",  
-        advanced: "Complex geometric figures involving parallel lines and angles",  
-        accuracy: 0.38  
+    "Properties of Parallel Lines and Angles": {  
+        basic: "Basic relationship between parallel lines and angles",  
+        medium: "Application of angle sums in parallel lines",  
+        advanced: "Relationship between parallel lines and angles in complex geometric figures",  
+        accuracy: 0.76  
     },  
     "Geometric Proof Methods": {  
-        basic: "Basic geometric proof methods",  
-        medium: "Proving with multiple combined conditions",  
-        advanced: "Advanced proof techniques for complex geometric relationships",  
-        accuracy: 0.39  
+        basic: "Basic geometric proof techniques",  
+        medium: "Application of geometric methods for reasoning",  
+        advanced: "Complete geometric proofs for complex problems",  
+        accuracy: 0.49  
     },  
-    "Quadrilateral Properties": {  
-        basic: "Understanding the relationship between quadrilateral diagonals and angles",  
-        medium: "Applying quadrilateral properties to solve geometric problems",  
-        advanced: "Complex reasoning of quadrilateral relationships under various conditions",  
-        accuracy: 0.37  
+    "Properties of Quadrilaterals": {  
+        basic: "Understanding the properties of quadrilaterals",  
+        medium: "Applying properties of quadrilaterals to solve geometric problems",  
+        advanced: "Reasoning about complex relationships in quadrilaterals",  
+        accuracy: 0.65  
     },  
     "Angle Calculation": {  
         basic: "Basic angle calculation formulas",  
         medium: "Various methods for angle calculation",  
         advanced: "Precise calculation of complex angle relationships",  
-        accuracy: 0.36  
+        accuracy: 0.58  
     },  
-    "Triangle Properties": {  
+    "Properties of Triangles": {  
         basic: "Basic properties of triangles",  
         medium: "Area calculation of triangles",  
         advanced: "Special properties of triangles",  
-        accuracy: 0.35  
+        accuracy: 0.72  
     },  
-    "Circle Properties": {  
+    "Properties of Circles": {  
         basic: "Basic properties of circles",  
         medium: "Relationship between circles and tangents",  
-        advanced: "Advanced properties of circles and their applications",  
-        accuracy: 0.34  
+        advanced: "Advanced applications of circle properties",  
+        accuracy: 0.81  
     },  
-    "Three-Dimensional Geometry": {  
-        basic: "Basic concepts of three-dimensional geometry, including points, lines, and planes",  
-        medium: "Basic applications of three-dimensional geometry, such as understanding 3D coordinate systems and formulas",  
-        advanced: "Advanced applications of three-dimensional geometry, including complex polyhedron volume and surface area calculations",  
-        accuracy: 0.33  
+    "Spatial Geometry": {  
+        basic: "Basic concepts of spatial geometry, including point, line, and plane relationships",  
+        medium: "Simple applications of spatial geometry, such as understanding three-dimensional coordinate systems and basic formulas for three-dimensional geometry",  
+        advanced: "Advanced applications of spatial geometry, including volume calculations and surface area calculations of complex polyhedra",  
+        accuracy: 0.54  
     },  
     "Plane Geometry": {  
-        basic: "Basic knowledge of plane geometry, including points, lines, and planes",  
+        basic: "Basic knowledge of plane geometry, including basic concepts of points, lines, and planes",  
         medium: "Intermediate applications of plane geometry, such as properties and area calculations of triangles and quadrilaterals",  
-        advanced: "Advanced techniques of plane geometry, including theorem applications and complex figure dissections",  
-        accuracy: 0.32  
+        advanced: "Advanced techniques in plane geometry, including the application of theorems and dissection of complex figures",  
+        accuracy: 0.43  
     },  
-    "Geometric Construction and Measurement": {  
-        basic: "Basic use of measurement tools",  
-        medium: "Advanced application of measurement tools",  
-        advanced: "Expert techniques for measurement tools",  
-        accuracy: 0.31  
+    "Geometric Constructions and Measurements": {  
+        basic: "Use of basic measuring tools",  
+        medium: "Application of complex measuring tools",  
+        advanced: "Advanced techniques for measuring tools",  
+        accuracy: 0.64  
     },  
     "Geometric Transformations": {  
         basic: "Basic applications of geometric transformations",  
         medium: "Applications of geometric transformations in polygons and spaces",  
         advanced: "Comprehensive applications of advanced geometric transformations",  
-        accuracy: 0.30  
+        accuracy: 0.66  
     },  
-    "Geometric Error and Precision Control": {  
-        basic: "Basic handling of measurement errors",  
-        medium: "Methods for controlling measurement precision",  
+    "Geometric Error Control": {  
+        basic: "Basic error handling in measurements",  
+        medium: "Methods of controlling measurement precision",  
         advanced: "Advanced analysis of measurement errors",  
-        accuracy: 0.29  
+        accuracy: 0.69  
     }  
 };  
 
-// ================ Force Directed Graph Data ================  
+// =================== Force-Directed Graph Data ===================  
 const graphData = {  
     nodes: [  
         { id: "Q24", type: "question", name: "Question 24", accuracy: 0.10 },  
-        { id: "K1", type: "knowledge", name: "Parallel Lines and Angle Properties", accuracy: 0.38 },  
-        { id: "K2", type: "knowledge", name: "Geometric Proof Methods", accuracy: 0.39 },  
-        { id: "K3", type: "knowledge", name: "Quadrilateral Properties", accuracy: 0.37 },  
-        { id: "K4", type: "knowledge", name: "Angle Calculation", accuracy: 0.36 },  
-        { id: "K5", type: "knowledge", name: "Triangle Properties", accuracy: 0.35 },  
-        { id: "K6", type: "knowledge", name: "Circle Properties", accuracy: 0.34 },  
-        { id: "K7", type: "knowledge", name: "Three-Dimensional Geometry", accuracy: 0.33 },  
-        { id: "K8", type: "knowledge", name: "Plane Geometry", accuracy: 0.32 },  
-        { id: "K9", type: "knowledge", name: "Geometric Construction and Measurement", accuracy: 0.31 },  
-        { id: "K10", type: "knowledge", name: "Geometric Transformations", accuracy: 0.30 },  
-        { id: "K11", type: "knowledge", name: "Geometric Error and Precision Control", accuracy: 0.29 }  
+        { id: "K1", type: "knowledge", name: "Properties of Parallel Lines and Angles", accuracy: 0.76 },  
+        { id: "K2", type: "knowledge", name: "Geometric Proof Methods", accuracy: 0.49 },  
+        { id: "K3", type: "knowledge", name: "Properties of Quadrilaterals", accuracy: 0.65 },  
+        { id: "K4", type: "knowledge", name: "Angle Calculation", accuracy: 0.58 },  
+        { id: "K5", type: "knowledge", name: "Properties of Triangles", accuracy: 0.72 },  
+        { id: "K6", type: "knowledge", name: "Properties of Circles", accuracy: 0.81 },  
+        { id: "K7", type: "knowledge", name: "Spatial Geometry", accuracy: 0.54 },  
+        { id: "K8", type: "knowledge", name: "Plane Geometry", accuracy: 0.43 },  
+        { id: "K9", type: "knowledge", name: "Geometric Constructions and Measurements", accuracy: 0.64 },  
+        { id: "K10", type: "knowledge", name: "Geometric Transformations", accuracy: 0.66 },  
+        { id: "K11", type: "knowledge", name: "Geometric Error Control", accuracy: 0.69 }  
     ],  
     links: [  
         { source: "Q24", target: "K1" },  
@@ -292,7 +288,7 @@ const graphData = {
     ]  
 };  
 
-// ================ Force Directed Graph Implementation ================  
+// =================== Force-Directed Graph Implementation ===================  
 const width = document.getElementById("left-panel").clientWidth;  
 const height = document.getElementById("left-panel").clientHeight;  
 
@@ -307,6 +303,7 @@ const simulation = d3.forceSimulation(graphData.nodes)
     .force("collision", d3.forceCollide().radius(60))  
     .on("tick", ticked);  
 
+// 先绘制边，再绘制节点，确保文字在边上方  
 const link = svgGraph.selectAll("line.link")  
     .data(graphData.links)  
     .enter()  
@@ -325,24 +322,30 @@ const node = svgGraph.selectAll("g.node")
 
 const tooltipGraph = d3.select("#graph-tooltip");  
 
+// 为节点添加圆和文字  
 node.append("circle")  
     .attr("r", d => d.type === "question" ? 18 : 14)  
     .attr("fill", d => {  
         if (d.type === "question") return "#fca5a5";  
-        return getNodeColor(d);  
+        // 使用正确的accuracy值进行颜色映射  
+        const accuracy = d.accuracy;  
+        if (accuracy < 0.4) return "#ef4444"; // Red (低于40%)  
+        if (accuracy < 0.6) return "#f97316"; // Orange (40%-60%)  
+        if (accuracy < 0.8) return "#eab308"; // Yellow (60%-80%)  
+        return "#22c555"; // Green (高于80%)  
     })  
     .on("mouseover", (event, d) => {  
         let htmlStr = "";  
         if (d.type === "question") {  
-            htmlStr = `Question：<strong>${d.name}</strong>`;  
+            htmlStr = `Question Number：<strong>${d.name}</strong>`;  
         } else {  
             htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
             if (qSet) {  
                 htmlStr += `  
-                    <br/><strong>Basic：</strong>${qSet.basic}  
-                    <br/><strong>Medium：</strong>${qSet.medium}  
-                    <br/><strong>Advanced：</strong>${qSet.advanced}  
+                    <br/><strong>Basic Exercise：</strong>${qSet.basic}  
+                    <br/><strong>Medium Exercise：</strong>${qSet.medium}  
+                    <br/><strong>Advanced Exercise：</strong>${qSet.advanced}  
                     <br/><strong>Accuracy：</strong>${(qSet.accuracy * 100).toFixed(1)}%`;  
             } else {  
                 htmlStr += "<br/>No detailed information";  
@@ -396,15 +399,7 @@ function ticked() {
     node.attr("transform", d => `translate(${d.x}, ${d.y})`);  
 }  
 
-function getNodeColor(d) {  
-    const acc = d.accuracy;  
-    if (acc < 0.4) return "#ef4444";  
-    if (acc < 0.6) return "#f97316";  
-    if (acc < 0.8) return "#eab308";  
-    return "#22c555";  
-}  
-
-// ================ History Correct Rate Line Chart ================  
+// =================== Historical Accuracy Line Chart ===================  
 const trendData = [  
     { time: "Test 1", accuracy: 0.0 },  
     { time: "Test 2", accuracy: 0.03 },  
