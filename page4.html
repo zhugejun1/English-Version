@@ -66,16 +66,16 @@
                 <span class="text-xs">60%-80%</span>  
             </div>  
             <div class="legend-item">  
-                <div class="legend-color" style="background-color: #22c55e;"></div>  
+                <div class="legend-color" style="background-color: #22c555;"></div>  
                 <span class="text-xs">Above 80%</span>  
             </div>  
         </div>  
     </div>  
 
-    <!-- Right Panel: Question Information -->  
+    <!-- Right Panel: Question Information and History Trend -->  
     <div id="right-panel" class="w-1/2 h-full flex flex-col p-4 space-y-4">  
 
-        <!-- Question Description -->  
+        <!-- Question Information -->  
         <div class="bg-white p-4 rounded shadow">  
             <h1 class="text-xl font-bold mb-2">Question Number: Question 6 - Ruler and Protractor Measurement Problem</h1>  
             <div class="mb-4">  
@@ -120,7 +120,7 @@
 </div>  
 
 <script>  
-// ================ Knowledge Points Data ================  
+// ================ Knowledge Points and Example Questions Data ================  
 const knowledgeQuestions = {  
     "Geometric Axioms": {  
         basic: "Basic concept of geometric axioms",  
@@ -128,9 +128,9 @@ const knowledgeQuestions = {
         advanced: "Advanced reasoning with geometric axioms",  
         accuracy: 0.67  
     },  
-    "Relationship Between Lines and Angles": {  
+    "Line and Angle Relationships": {  
         basic: "Basic relationship between lines and angles",  
-        medium: "Application of lines and angles in geometric reasoning",  
+        medium: "Application of line and angle relationships in geometric reasoning",  
         advanced: "Advanced relationships between lines and angles",  
         accuracy: 0.68  
     },  
@@ -158,16 +158,16 @@ const knowledgeQuestions = {
         advanced: "Advanced techniques for using the ruler",  
         accuracy: 0.61  
     },  
-    "Measurement Tool Techniques": {  
-        basic: "Basic use of measurement tools",  
-        medium: "Application of complex measurement tools",  
-        advanced: "Advanced techniques for measurement tools",  
+    "Measurement Tool Usage Tips": {  
+        basic: "Basic measurement tools usage",  
+        medium: "Advanced measurement tools application",  
+        advanced: "Expert measurement tools techniques",  
         accuracy: 0.64  
     },  
     "Advanced Measurement Methods": {  
         basic: "Basic advanced measurement methods",  
-        medium: "Moderately complex measurement methods",  
-        advanced: "Advanced application of measurement methods",  
+        medium: "Intermediate complexity measurement methods",  
+        advanced: "Application of advanced measurement methods",  
         accuracy: 0.66  
     },  
     "Measurement Error and Precision Control": {  
@@ -183,12 +183,12 @@ const graphData = {
     nodes: [  
         { id: "Q6", type: "question", name: "Question 6", accuracy: 0.6757 },  
         { id: "K1", type: "knowledge", name: "Geometric Axioms", accuracy: 0.67 },  
-        { id: "K2", type: "knowledge", name: "Relationship Between Lines and Angles", accuracy: 0.68 },  
+        { id: "K2", type: "knowledge", name: "Line and Angle Relationships", accuracy: 0.68 },  
         { id: "K3", type: "knowledge", name: "Protractor Application and Measurement", accuracy: 0.65 },  
         { id: "K4", type: "knowledge", name: "Perpendicular Measurement", accuracy: 0.63 },  
         { id: "K5", type: "knowledge", name: "Parallel Line Measurement", accuracy: 0.62 },  
         { id: "K6", type: "knowledge", name: "Ruler Usage", accuracy: 0.61 },  
-        { id: "K7", type: "knowledge", name: "Measurement Tool Techniques", accuracy: 0.64 },  
+        { id: "K7", type: "knowledge", name: "Measurement Tool Usage Tips", accuracy: 0.64 },  
         { id: "K8", type: "knowledge", name: "Advanced Measurement Methods", accuracy: 0.66 },  
         { id: "K9", type: "knowledge", name: "Measurement Error and Precision Control", accuracy: 0.69 }  
     ],  
@@ -405,4 +405,4 @@ svgLine.selectAll(".dot")
     });  
 </script>  
 </body>  
-</html>  
+</html>
