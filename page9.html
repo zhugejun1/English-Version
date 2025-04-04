@@ -1,8 +1,8 @@
 <!DOCTYPE html>  
-<html lang="zh">  
+<html lang="en">  
 <head>  
     <meta charset="UTF-8" />  
-    <title>第9题 - 数据分析题目</title>  
+    <title>Question 9 - Data Analysis</title>  
     <!-- Tailwind CSS -->  
     <script src="https://cdn.tailwindcss.com"></script>  
     <!-- D3.js v6 -->  
@@ -38,7 +38,7 @@
 <!-- 顶部：返回按钮 -->  
 <div class="p-4 bg-white shadow">  
     <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
-        返回题目列表  
+        Return to Question List  
     </button>  
 </div>  
 
@@ -52,10 +52,10 @@
         
         <!-- 颜色对应正确率说明 -->  
         <div class="color-legend">  
-            <h3 class="text-sm font-bold mb-2">正确率说明:</h3>  
+            <h3 class="text-sm font-bold mb-2">Accuracy Level Explanation:</h3>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #ef4444;"></div>  
-                <span class="text-xs">低于40%</span>  
+                <span class="text-xs">Below 40%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #f97316;"></div>  
@@ -67,11 +67,11 @@
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #22c55e;"></div>  
-                <span class="text-xs">大于80%</span>  
+                <span class="text-xs">Above 80%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #9ca3af;"></div>  
-                <span class="text-xs">相关知识点</span>  
+                <span class="text-xs">Related Knowledge Points</span>  
             </div>  
         </div>  
     </div>  
@@ -81,42 +81,42 @@
 
         <!-- 题干描述区域 -->  
         <div class="bg-white p-4 rounded shadow">  
-            <h1 class="text-xl font-bold mb-2">题号：第9题</h1>  
+            <h1 class="text-xl font-bold mb-2">Question Number: 9</h1>  
             <p class="mb-2">  
-                观察表格中的数据：  
+                Observe the data in the table:  
             </p>  
             <p class="mb-2">  
-                \(x\) ：16, 16.1, 16.2, 16.3, 16.4, 16.5, 16.6, 16.7, 16.8, 16.9, 17  
+                \(x\): 16, 16.1, 16.2, 16.3, 16.4, 16.5, 16.6, 16.7, 16.8, 16.9, 17  
             </p>  
             <p class="mb-2">  
-                \(x^2\) ：256, 259.21, 262.44, 265.69, 268.96, 272.25, 275.56, 278.89, 282.24, 285.61, 289  
+                \(x^2\): 256, 259.21, 262.44, 265.69, 268.96, 272.25, 275.56, 278.89, 282.24, 285.61, 289  
             </p>  
             <p class="mb-4">  
-                根据表格中的数据可知 \(\sqrt{280}\) 在哪个两个数之间（ ）  
+                According to the table, between which two numbers is \(\sqrt{280}\) located?  
             </p>  
             <div class="mb-4">  
                 <input type="checkbox" id="option1" />  
-                <label for="option1">A. 在16.4和16.5之间</label>  
+                <label for="option1">A. Between 16.4 and 16.5</label>  
             </div>  
             <div class="mb-4">  
                 <input type="checkbox" id="option2" />  
-                <label for="option2">B. 在16.6和16.7之间</label>  
+                <label for="option2">B. Between 16.6 and 16.7</label>  
             </div>  
             <div class="mb-4">  
                 <input type="checkbox" id="option3" />  
-                <label for="option3">C. 在16.7和16.8之间</label>  
+                <label for="option3">C. Between 16.7 and 16.8</label>  
             </div>  
             <div class="mb-4">  
                 <input type="checkbox" id="option4" />  
-                <label for="option4">D. 在16.8和16.9之间</label>  
+                <label for="option4">D. Between 16.8 and 16.9</label>  
             </div>  
-            <p>当前掌握率：<span class="text-green-600 font-medium">82.56%</span></p>  
-            <p>历史正确率：<span class="text-yellow-600 font-medium">85%</span></p>  
+            <p>Current Mastery Rate：<span class="text-green-600 font-medium">82.56%</span></p>  
+            <p>Historical Accuracy Rate：<span class="text-yellow-600 font-medium">85%</span></p>  
         </div>  
 
-        <!-- 历史正确率折线图 -->  
+        <!-- Historical Accuracy Trend Line Chart -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
-            <h2 class="text-lg font-bold mb-2">历史正确率趋势</h2>  
+            <h2 class="text-lg font-bold mb-2">Historical Accuracy Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
             <div id="line-tooltip" class="tooltip"></div>  
         </div>  
@@ -124,86 +124,86 @@
 </div>  
 
 <script>  
-// 知识点与示例题数据  
+// Knowledge points and example questions data  
 const knowledgeQuestions = {  
-    "平方数的性质": {  
-        basic: "平方数的定义与基本特性",  
-        medium: "平方数的计算与应用",  
-        advanced: "平方数与数列的关系",  
+    "Properties of Square Numbers": {  
+        basic: "Definition and basic properties of square numbers",  
+        medium: "Calculation and application of square numbers",  
+        advanced: "Relationship between square numbers and sequences",  
         accuracy: 0.86  
     },  
-    "平方根的应用": {  
-        basic: "平方根的定义与求解",  
-        medium: "平方根的近似值计算",  
-        advanced: "平方根在实际问题中的应用",  
+    "Applications of Square Roots": {  
+        basic: "Definition and calculation of square roots",  
+        medium: "Approximation of square roots",  
+        advanced: "Applications of square roots in real-world problems",  
         accuracy: 0.84  
     },  
-    "数据表分析": {  
-        basic: "数据表的基本读取方法",  
-        medium: "数据表中的插值与估算",  
-        advanced: "通过数据表进行预测与推断",  
+    "Data Table Analysis": {  
+        basic: "Basic methods for reading data tables",  
+        medium: "Interpolation and estimation in data tables",  
+        advanced: "Forecasting and inference using data tables",  
         accuracy: 0.78  
     },  
-    "函数单调性": {  
-        basic: "函数单调性的概念",  
-        medium: "判断函数单调区间的方法",  
-        advanced: "利用单调性解决数学问题",  
+    "Function Monotonicity": {  
+        basic: "Concept of function monotonicity",  
+        medium: "Methods to determine monotonic intervals of functions",  
+        advanced: "Solving mathematical problems using monotonicity",  
         accuracy: 0.72  
     },  
-    "数据比较与排序": {  
-        basic: "数据比较的基本方法",  
-        medium: "排序算法与技巧",  
-        advanced: "数据区间与范围分析",  
+    "Data Comparison and Sorting": {  
+        basic: "Basic methods for data comparison",  
+        medium: "Sorting algorithms and techniques",  
+        advanced: "Interval and range analysis of data",  
         accuracy: 0.88  
     },  
-    "二次函数": {  
-        basic: "二次函数的基本性质",  
-        medium: "二次函数图像特征",  
-        advanced: "二次函数的应用问题",  
+    "Quadratic Functions": {  
+        basic: "Basic properties of quadratic functions",  
+        medium: "Characteristics of quadratic function graphs",  
+        advanced: "Application problems of quadratic functions",  
         accuracy: 0.65  
     },  
-    "近似值计算": {  
-        basic: "近似值的概念与表示",  
-        medium: "有效数字与精确度",  
-        advanced: "复杂计算中的近似方法",  
+    "Approximation Calculations": {  
+        basic: "Concept and representation of approximations",  
+        medium: "Significant figures and precision",  
+        advanced: "Approximation methods in complex calculations",  
         accuracy: 0.75  
     },  
-    "估算技巧": {  
-        basic: "估算的基本方法",  
-        medium: "合理估计数值大小",  
-        advanced: "估算在解题中的应用",  
+    "Estimation Techniques": {  
+        basic: "Basic methods of estimation",  
+        medium: "Reasonable estimation of numerical size",  
+        advanced: "Application of estimation in problem solving",  
         accuracy: 0.92  
     },  
-    "数值分析": {  
-        basic: "数值分析的基本方法",  
-        medium: "数值计算与误差分析",  
-        advanced: "数值模型的建立与应用",  
+    "Numerical Analysis": {  
+        basic: "Basic methods of numerical analysis",  
+        medium: "Numerical computation and error analysis",  
+        advanced: "Establishment and application of numerical models",  
         accuracy: 0.55,  
         related: true  
     },  
-    "区间与不等式": {  
-        basic: "区间的表示方法",  
-        medium: "区间与不等式的关系",  
-        advanced: "区间在函数中的应用",  
+    "Intervals and Inequalities": {  
+        basic: "Methods of interval representation",  
+        medium: "Relationship between intervals and inequalities",  
+        advanced: "Application of intervals in functions",  
         accuracy: 0.48,  
         related: true  
     }  
 };  
 
-// 设置力导向图数据  
+// Force-directed graph data setup  
 const graphData = {  
     nodes: [  
-        { id: "Q9", type: "question", name: "第9题", accuracy: 0.85 },  
-        { id: "K1", type: "knowledge", name: "平方数的性质", accuracy: 0.86 },  
-        { id: "K2", type: "knowledge", name: "平方根的应用", accuracy: 0.84 },  
-        { id: "K3", type: "knowledge", name: "数据表分析", accuracy: 0.78 },  
-        { id: "K4", type: "knowledge", name: "函数单调性", accuracy: 0.72 },  
-        { id: "K5", type: "knowledge", name: "数据比较与排序", accuracy: 0.88 },  
-        { id: "K6", type: "knowledge", name: "二次函数", accuracy: 0.65 },  
-        { id: "K7", type: "knowledge", name: "近似值计算", accuracy: 0.75 },  
-        { id: "K8", type: "knowledge", name: "估算技巧", accuracy: 0.92 },  
-        { id: "K9", type: "knowledge", name: "数值分析", accuracy: 0.55, related: true },  
-        { id: "K10", type: "knowledge", name: "区间与不等式", accuracy: 0.48, related: true }  
+        { id: "Q9", type: "question", name: "Question 9", accuracy: 0.85 },  
+        { id: "K1", type: "knowledge", name: "Properties of Square Numbers", accuracy: 0.86 },  
+        { id: "K2", type: "knowledge", name: "Applications of Square Roots", accuracy: 0.84 },  
+        { id: "K3", type: "knowledge", name: "Data Table Analysis", accuracy: 0.78 },  
+        { id: "K4", type: "knowledge", name: "Function Monotonicity", accuracy: 0.72 },  
+        { id: "K5", type: "knowledge", name: "Data Comparison and Sorting", accuracy: 0.88 },  
+        { id: "K6", type: "knowledge", name: "Quadratic Functions", accuracy: 0.65 },  
+        { id: "K7", type: "knowledge", name: "Approximation Calculations", accuracy: 0.75 },  
+        { id: "K8", type: "knowledge", name: "Estimation Techniques", accuracy: 0.92 },  
+        { id: "K9", type: "knowledge", name: "Numerical Analysis", accuracy: 0.55, related: true },  
+        { id: "K10", type: "knowledge", name: "Intervals and Inequalities", accuracy: 0.48, related: true }  
     ],  
     links: [  
         { source: "Q9", target: "K1" },  
@@ -220,24 +220,24 @@ const graphData = {
     ]  
 };  
 
-// 获取节点颜色函数  
+// Function to get node colors  
 function getNodeColor(d) {  
     if (d.type === "question") {  
-        return "#fca5a5"; // 题目节点颜色  
+        return "#fca5a5"; // Color for question nodes  
     }  
     
     if (d.related) {  
-        return "#9ca3af"; // 相关知识点为灰色  
+        return "#9ca3af"; // Gray for related knowledge points  
     }  
     
     const acc = d.accuracy;  
-    if (acc < 0.4) return "#ef4444"; // 红色，低于40%  
-    if (acc < 0.6) return "#f97316"; // 橙色，40%-60%  
-    if (acc < 0.8) return "#eab308"; // 黄色，60%-80%  
-    return "#22c55e"; // 绿色，大于80%  
+    if (acc < 0.4) return "#ef4444"; // Red for below 40%  
+    if (acc < 0.6) return "#f97316"; // Orange for 40%-60%  
+    if (acc < 0.8) return "#eab308"; // Yellow for 60%-80%  
+    return "#22c55e"; // Green for above 80%  
 }  
 
-// 绘制力导向图  
+// Draw force-directed graph  
 const width = document.getElementById("left-panel").clientWidth;  
 const height = document.getElementById("left-panel").clientHeight;  
 
@@ -245,12 +245,12 @@ const svgGraph = d3.select("#graph-svg")
     .attr("width", width)  
     .attr("height", height);  
 
-// 增强力导向图配置，防止重叠  
+// Enhanced force-directed graph configuration  
 const simulation = d3.forceSimulation(graphData.nodes)  
     .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))  
     .force("charge", d3.forceManyBody().strength(-600))  
     .force("center", d3.forceCenter(width / 2, height / 2))  
-    .force("collision", d3.forceCollide().radius(60)) // 增加碰撞检测  
+    .force("collision", d3.forceCollide().radius(60)) // Enhanced collision detection  
     .on("tick", ticked);  
 
 const link = svgGraph.selectAll("line.link")  
@@ -264,7 +264,7 @@ const node = svgGraph.selectAll("g.node")
     .enter()  
     .append("g")  
     .attr("class", "node")  
-    .call(d3.drag() // 添加拖拽功能  
+    .call(d3.drag() // Add drag functionality  
         .on("start", dragstarted)  
         .on("drag", dragged)  
         .on("end", dragended));  
@@ -277,19 +277,19 @@ node.append("circle")
     .on("mouseover", (event, d) => {  
         let htmlStr = "";  
         if (d.type === "question") {  
-            htmlStr = `题号：<strong>${d.name}</strong>`;  
+            htmlStr = `Question：<strong>${d.name}</strong>`;  
         } else {  
-            htmlStr = `知识点：<strong>${d.name}</strong>`;  
+            htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
             if (qSet) {  
                 htmlStr += `  
-                    <br/><strong>基础题：</strong>${qSet.basic}  
-                    <br/><strong>中等题：</strong>${qSet.medium}  
-                    <br/><strong>较难题：</strong>${qSet.advanced}  
-                    <br/><strong>正确率：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
+                    <br/><strong>Basic：</strong>${qSet.basic}  
+                    <br/><strong>Medium：</strong>${qSet.medium}  
+                    <br/><strong>Advanced：</strong>${qSet.advanced}  
+                    <br/><strong>Accuracy：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
                 `;  
             } else {  
-                htmlStr += "<br/>暂无示例题";  
+                htmlStr += "<br/>No example questions available";  
             }  
         }  
         tooltipGraph  
@@ -308,7 +308,7 @@ node.append("text")
     .attr("fill", "#333")  
     .attr("font-weight", d => (d.type === "question" ? "bold" : "normal"));  
 
-// 拖拽功能实现  
+// Drag functionality implementation  
 function dragstarted(event, d) {  
     if (!event.active) simulation.alphaTarget(0.3).restart();  
     d.fx = d.x;  
@@ -327,7 +327,7 @@ function dragended(event, d) {
 }  
 
 function ticked() {  
-    // 确保节点不会超出可视区域  
+    // Ensure nodes do not go beyond the visible area  
     graphData.nodes.forEach(function(d) {  
         d.x = Math.max(40, Math.min(width - 40, d.x));  
         d.y = Math.max(40, Math.min(height - 40, d.y));  
@@ -342,13 +342,13 @@ function ticked() {
     node.attr("transform", d => `translate(${d.x}, ${d.y})`);  
 }  
 
-// 历史正确率折线图  
+// Historical Accuracy Trend Line Chart  
 const trendData = [  
-    { time: "测验1", accuracy: 0.76 },  
-    { time: "测验2", accuracy: 0.79 },  
-    { time: "测验3", accuracy: 0.82 },  
-    { time: "测验4", accuracy: 0.84 },  
-    { time: "测验5", accuracy: 0.85 }  
+    { time: "Test 1", accuracy: 0.76 },  
+    { time: "Test 2", accuracy: 0.79 },  
+    { time: "Test 3", accuracy: 0.82 },  
+    { time: "Test 4", accuracy: 0.84 },  
+    { time: "Test 5", accuracy: 0.85 }  
 ];  
 
 const chartWidth = document.getElementById("line-chart").clientWidth;  
@@ -364,7 +364,7 @@ const xScale = d3.scalePoint()
     .padding(0.5);  
 
 const yScale = d3.scaleLinear()  
-    .domain([0.7, 0.9])  // 调整比例，使波动更明显  
+    .domain([0.7, 0.9])  // Adjusted scale for more visible trend  
     .range([innerHeight, 0]);  
 
 const svgLine = d3.select("#line-chart")  
@@ -411,7 +411,7 @@ svgLine.selectAll(".dot")
     .attr("fill", "#ff5722")  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>正确率：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Accuracy：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
@@ -421,4 +421,4 @@ svgLine.selectAll(".dot")
     });  
 </script>  
 </body>  
-</html> 
+</html>  
