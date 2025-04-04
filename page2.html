@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>  
 <html lang="en">  
 <head>  
@@ -8,7 +9,7 @@
     <!-- D3.js v6 -->  
     <script src="https://d3js.org/d3.v6.min.js"></script>  
 
-    <!-- MathJax Configuration -->  
+    <!-- MathJax -->  
     <script>  
         MathJax = {  
             tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["$$", "$$"]] },  
@@ -20,10 +21,10 @@
     <style>  
         body { margin: 0; font-family: Arial, sans-serif; background-color: #f6f9fc; }  
         .node circle { cursor: pointer; }  
-        .node circle:hover { fill: #555; }  
+        .node circle:hover { fill: #333; }  
         .node text { pointer-events: none; font-size: 12px; fill: #333; }  
         line.link { stroke: #ccc; stroke-width: 1.5px; }  
-        .tooltip { position: absolute; min-width: 150px; padding: 8px; font-size: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #ddd; border-radius: 4px; pointer-events: none; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); opacity: 0; transition: opacity 0.2s; z-index: 999; }  
+        .tooltip { position: absolute; min-width: 150px; padding: 8px; font-size: 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 4px; pointer-events: none; box-shadow: 0 2px 5px rgba(0,0,0,0.15); opacity: 0; transition: opacity 0.2s; z-index: 999; }  
         .line { fill: none; stroke-width: 2px; }  
         .line-chart-axis path, .line-chart-axis line { fill: none; stroke: #ccc; }  
         .dot { fill: #ff5722; stroke: #fff; stroke-width: 1px; cursor: pointer; }  
@@ -35,55 +36,51 @@
 </head>  
 <body class="h-screen w-screen overflow-hidden bg-gray-100">  
 
-<!-- Top: Back Button -->  
+<!-- Top Navigation -->  
 <div class="p-4 bg-white shadow">  
     <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition-colors" onclick="location.href='index.html'">  
-        Back to Question List  
+        Return to Question List  
     </button>  
 </div>  
 
-<!-- Main: Left Force-Directed Graph + Right Question Info -->  
+<!-- Main Content -->  
 <div class="flex h-[calc(100vh-64px)]">  
 
-    <!-- Left: Force-Directed Graph -->  
+    <!-- Left Panel: Force Directed Graph -->  
     <div id="left-panel" class="w-1/2 h-full bg-white relative">  
         <svg id="graph-svg" class="w-full h-full"></svg>  
         <div id="graph-tooltip" class="tooltip"></div>  
-
-        <!-- Color Legend for Accuracy Explanation -->  
+        
+        <!-- Color Legend -->  
         <div class="color-legend">  
-            <h3 class="text-sm font-bold mb-2">Accuracy Explanation:</h3>  
+            <h3 class="text-sm font-bold mb-2">Accuracy Rate Explanation：</h3>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #ef4444;"></div>  
                 <span class="text-xs">Below 40%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #f97316;"></div>  
-                <span class="text-xs">40% - 60%</span>  
+                <span class="text-xs">40%-60%</span>  
             </div>  
             <div class="legend-item">  
                 <div class="legend-color" style="background-color: #eab308;"></div>  
-                <span class="text-xs">60% - 80%</span>  
+                <span class="text-xs">60%-80%</span>  
             </div>  
             <div class="legend-item">  
-                <div class="legend-color" style="background-color: #22c55e;"></div>  
+                <div class="legend-color" style="background-color: #22c555;"></div>  
                 <span class="text-xs">Above 80%</span>  
-            </div>  
-            <div class="legend-item">  
-                <div class="legend-color" style="background-color: #9ca3af;"></div>  
-                <span class="text-xs">Related Knowledge Points</span>  
             </div>  
         </div>  
     </div>  
 
-    <!-- Right: Question Info and Historical Accuracy Line Chart -->  
+    <!-- Right Panel: Question Information -->  
     <div id="right-panel" class="w-1/2 h-full flex flex-col p-4 space-y-4">  
 
-        <!-- Problem Description Area -->  
+        <!-- Question Description -->  
         <div class="bg-white p-4 rounded shadow">  
-            <h1 class="text-xl font-bold mb-2">Question No: Question 2 - Square Root Problem</h1>  
+            <h1 class="text-xl font-bold mb-2">Question Number: Question 2 - Square Root Problem</h1>  
             <div class="mb-4">  
-                <p class="mb-2">The square root of 49 is ( )</p>  
+                <p class="mb-2">The square root of 49 is ()</p>  
             </div>  
             
             <div class="space-y-4">  
@@ -106,17 +103,17 @@
             </div>  
             
             <div class="mt-4">  
-                <label for="answer" class="block mb-2">Your Answer:</label>  
+                <label for="answer" class="block mb-2">Your Answer：</label>  
                 <input type="text" id="answer" class="border p-2 rounded w-full" />  
             </div>  
             
-            <p class="mt-4">Current Mastery Rate: <span class="text-orange-600 font-medium">94.59%</span></p>  
-            <p>Historical Accuracy Rate: <span class="text-orange-600 font-medium">90%</span></p>  
+            <p class="mt-4">Current mastery rate：<span class="text-orange-600 font-medium">94.59%</span></p>  
+            <p>History correct rate：<span class="text-orange-600 font-medium">90%</span></p>  
         </div>  
 
-        <!-- Historical Accuracy Line Chart -->  
+        <!-- History Correct Rate Line Chart -->  
         <div class="flex-1 bg-white p-4 rounded shadow relative">  
-            <h2 class="text-lg font-bold mb-2">Historical Accuracy Trend</h2>  
+            <h2 class="text-lg font-bold mb-2">History Correct Rate Trend</h2>  
             <svg id="line-chart" class="w-full h-full"></svg>  
             <div id="line-tooltip" class="tooltip"></div>  
         </div>  
@@ -124,86 +121,70 @@
 </div>  
 
 <script>  
-// ================ Knowledge Points and Example Questions Data ================  
+// ================ Knowledge Points Data ================  
 const knowledgeQuestions = {  
-    "Definition of Square Root": {  
-        basic: "Basic concept of square root",  
-        medium: "Algebraic calculations of square root",  
-        advanced: "Advanced applications of square root",  
+    "Definition of Square Roots": {  
+        basic: "Basic concept of square roots",  
+        medium: "Algebraic calculations of square roots",  
+        advanced: "Advanced applications of square roots",  
         accuracy: 0.85  
     },  
-    "Distinction Between Positive and Negative Square Roots": {  
+    "Distinction of Positive and Negative Square Roots": {  
         basic: "Concept of positive and negative square roots",  
         medium: "Applications of positive and negative square roots in different scenarios",  
         advanced: "Solving complex square root problems",  
         accuracy: 0.88  
     },  
-    "Calculating Square Roots of Algebraic Expressions": {  
-        basic: "Calculating square roots of simple algebraic expressions",  
-        medium: "Calculating square roots of composite algebraic expressions",  
-        advanced: "Advanced applications of square roots in algebraic expressions",  
+    "Calculation of Algebraic Square Roots": {  
+        basic: "Calculating simple algebraic square roots",  
+        medium: "Calculating complex algebraic square roots",  
+        advanced: "Advanced applications of algebraic square roots",  
         accuracy: 0.90  
     },  
     "Square Roots on the Number Line": {  
         basic: "Representation of square roots on the number line",  
         medium: "Applications of square roots on the number line",  
-        advanced: "Geometric significance of square roots and the number line",  
+        advanced: "Geometric meaning of square roots on the number line",  
         accuracy: 0.87  
     },  
-    "Estimating Square Roots": {  
-        basic: "Approximation of square roots",  
-        medium: "Method of estimating square roots",  
+    "Estimation of Square Roots": {  
+        basic: "Approximate values of square roots",  
+        medium: "Methods for estimating square roots",  
         advanced: "Advanced techniques for estimating square roots",  
         accuracy: 0.89  
     },  
-    "Geometric Significance of Square Roots": {  
-        basic: "Applications of square roots in geometry",  
-        medium: "Representation of square roots in shapes",  
-        advanced: "Applications of square roots in advanced geometric problems",  
-        accuracy: 0.86  
+    "Basic Applications of Square Roots": {  
+        basic: "Simple applications of square roots",  
+        medium: "Applications of square roots in basic problems",  
+        advanced: "Applications of square roots in complex problems",  
+        accuracy: 0.92  
     },  
-    "Relationship Between Square Roots and Exponents": {  
-        basic: "Basic relationship between square roots and exponents",  
-        medium: "Relationship between square roots and exponents in algebra",  
-        advanced: "Advanced applications of square roots and exponents",  
-        accuracy: 0.84  
+    "Intermediate Applications of Square Roots": {  
+        basic: "Applications of square roots in algebra",  
+        medium: "Applications of square roots in geometry",  
+        advanced: "Applications of square roots in combined problems",  
+        accuracy: 0.91  
     },  
-    "Inverse Operation of Square Roots": {  
-        basic: "Concept of the inverse operation of square roots",  
-        medium: "Applications of inverse operations of square roots in algebra",  
-        advanced: "Complex problems of inverse operations of square roots",  
-        accuracy: 0.83  
-    },  
-    "Example Problem 1": {  
-        basic: "Calculate the square root of 49",  
-        medium: "Calculate the square root of 64",  
-        advanced: "Calculate more complex square roots",  
-        accuracy: 0.95,  
-        related: true  
-    },  
-    "Example Problem 2": {  
-        basic: "Solve problems involving real square roots",  
-        medium: "Solve problems involving negative square roots",  
-        advanced: "Solve problems involving complex square roots",  
-        accuracy: 0.92,  
-        related: true  
+    "Advanced Applications of Square Roots": {  
+        basic: "Applications of square roots in advanced algebra",  
+        medium: "Applications of square roots in real-world problems",  
+        advanced: "Applications of square roots in multidisciplinary problems",  
+        accuracy: 0.93  
     }  
 };  
 
-// ================ Force-Directed Graph Data ================  
+// ================ Force Directed Graph Data ================  
 const graphData = {  
     nodes: [  
         { id: "Q2", type: "question", name: "Question 2", accuracy: 0.9459 },  
-        { id: "K1", type: "knowledge", name: "Definition of Square Root", accuracy: 0.85 },  
-        { id: "K2", type: "knowledge", name: "Distinction Between Positive and Negative Square Roots", accuracy: 0.88 },  
-        { id: "K3", type: "knowledge", name: "Calculating Square Roots of Algebraic Expressions", accuracy: 0.90 },  
+        { id: "K1", type: "knowledge", name: "Definition of Square Roots", accuracy: 0.85 },  
+        { id: "K2", type: "knowledge", name: "Distinction of Positive and Negative Square Roots", accuracy: 0.88 },  
+        { id: "K3", type: "knowledge", name: "Calculation of Algebraic Square Roots", accuracy: 0.90 },  
         { id: "K4", type: "knowledge", name: "Square Roots on the Number Line", accuracy: 0.87 },  
-        { id: "K5", type: "knowledge", name: "Estimating Square Roots", accuracy: 0.89 },  
-        { id: "K6", type: "knowledge", name: "Geometric Significance of Square Roots", accuracy: 0.86 },  
-        { id: "K7", type: "knowledge", name: "Relationship Between Square Roots and Exponents", accuracy: 0.84 },  
-        { id: "K8", type: "knowledge", name: "Inverse Operation of Square Roots", accuracy: 0.83 },  
-        { id: "E1", type: "example", name: "Example Problem 1", accuracy: 0.95, related: true },  
-        { id: "E2", type: "example", name: "Example Problem 2", accuracy: 0.92, related: true }  
+        { id: "K5", type: "knowledge", name: "Estimation of Square Roots", accuracy: 0.89 },  
+        { id: "K6", type: "knowledge", name: "Basic Applications of Square Roots", accuracy: 0.92 },  
+        { id: "K7", type: "knowledge", name: "Intermediate Applications of Square Roots", accuracy: 0.91 },  
+        { id: "K8", type: "knowledge", name: "Advanced Applications of Square Roots", accuracy: 0.93 }  
     ],  
     links: [  
         { source: "Q2", target: "K1" },  
@@ -211,21 +192,19 @@ const graphData = {
         { source: "Q2", target: "K3" },  
         { source: "Q2", target: "K4" },  
         { source: "Q2", target: "K5" },  
-        { source: "Q2", target: "K6" },  
-        { source: "Q2", target: "K7" },  
-        { source: "Q2", target: "K8" },  
-        { source: "K1", target: "E1" },  
-        { source: "K2", target: "E2" },  
-        { source: "K3", target: "E1" },  
-        { source: "K4", target: "E1" },  
-        { source: "K5", target: "E1" },  
-        { source: "K6", target: "E1" },  
-        { source: "K7", target: "E2" },  
-        { source: "K8", target: "E2" }  
+        { source: "K1", target: "K6" },  
+        { source: "K1", target: "K7" },  
+        { source: "K1", target: "K8" },  
+        { source: "K2", target: "K6" },  
+        { source: "K3", target: "K7" },  
+        { source: "K4", target: "K8" },  
+        { source: "K5", target: "K6" },  
+        { source: "K5", target: "K7" },  
+        { source: "K5", target: "K8" }  
     ]  
 };  
 
-// ================ Force-Directed Graph Implementation ================  
+// ================ Force Directed Graph Implementation ================  
 const width = document.getElementById("left-panel").clientWidth;  
 const height = document.getElementById("left-panel").clientHeight;  
 
@@ -262,24 +241,24 @@ node.append("circle")
     .attr("r", d => d.type === "question" ? 18 : 14)  
     .attr("fill", d => {  
         if (d.type === "question") return "#fca5a5";  
-        return d.type === "example" ? "#9ca3af" : getNodeColor(d);  
+        return getNodeColor(d);  
     })  
     .on("mouseover", (event, d) => {  
         let htmlStr = "";  
         if (d.type === "question") {  
-            htmlStr = `Question No: <strong>${d.name}</strong>`;  
+            htmlStr = `Question：<strong>${d.name}</strong>`;  
         } else {  
-            htmlStr = `Knowledge Point: <strong>${d.name}</strong>`;  
+            htmlStr = `Knowledge Point：<strong>${d.name}</strong>`;  
             const qSet = knowledgeQuestions[d.name];  
             if (qSet) {  
                 htmlStr += `  
-                    <br/><strong>Basic Problem:</strong>${qSet.basic}  
-                    <br/><strong>Medium Problem:</strong>${qSet.medium}  
-                    <br/><strong>Advanced Problem:</strong>${qSet.advanced}  
-                    <br/><strong>Accuracy:</strong>${(qSet.accuracy * 100).toFixed(1)}%  
+                    <br/><strong>Basic：</strong>${qSet.basic}  
+                    <br/><strong>Medium：</strong>${qSet.medium}  
+                    <br/><strong>Advanced：</strong>${qSet.advanced}  
+                    <br/><strong>Accuracy：</strong>${(qSet.accuracy * 100).toFixed(1)}%  
                 `;  
             } else {  
-                htmlStr += "<br/>No example problems available";  
+                htmlStr += "<br/>No detailed information";  
             }  
         }  
         tooltipGraph  
@@ -320,7 +299,7 @@ function ticked() {
         d.x = Math.max(40, Math.min(width - 40, d.x));  
         d.y = Math.max(40, Math.min(height - 40, d.y));  
     });  
-    
+
     link  
         .attr("x1", d => d.source.x)  
         .attr("y1", d => d.source.y)  
@@ -335,10 +314,10 @@ function getNodeColor(d) {
     if (acc < 0.4) return "#ef4444";  
     if (acc < 0.6) return "#f97316";  
     if (acc < 0.8) return "#eab308";  
-    return "#22c55e";  
+    return "#22c555";  
 }  
 
-// ================ Historical Accuracy Line Chart ================  
+// ================ History Correct Rate Line Chart ================  
 const trendData = [  
     { time: "Test 1", accuracy: 0.85 },  
     { time: "Test 2", accuracy: 0.88 },  
@@ -407,7 +386,7 @@ svgLine.selectAll(".dot")
     .attr("fill", "#ff5722")  
     .on("mouseover", (event, d) => {  
         tooltipLine  
-            .html(`${d.time}<br/>Accuracy Rate: <strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
+            .html(`${d.time}<br/>Accuracy Rate：<strong>${(d.accuracy * 100).toFixed(1)}%</strong>`)  
             .style("opacity", 1)  
             .style("left", (event.pageX + 10) + "px")  
             .style("top", (event.pageY - 10) + "px");  
